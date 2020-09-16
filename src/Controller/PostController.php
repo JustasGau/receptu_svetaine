@@ -1,4 +1,10 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: hicham benkachoud
+ * Date: 02/01/2020
+ * Time: 22:44
+ */
 
 namespace App\Controller;
 
@@ -19,6 +25,8 @@ use Symfony\Component\Routing\Annotation\Route;
 class PostController extends AbstractController
 {
     /**
+     * @param PostRepository $postRepository
+     * @return JsonResponse
      * @Route("/posts", name="posts", methods={"GET"})
      */
     public function getPosts(PostRepository $postRepository){
@@ -27,23 +35,27 @@ class PostController extends AbstractController
     }
 
     /**
+     * @param Request $request
+     * @param EntityManagerInterface $entityManager
+     * @param PostRepository $postRepository
+     * @return JsonResponse
+     * @throws \Exception
      * @Route("/posts", name="posts_add", methods={"POST"})
      */
     public function addPost(Request $request, EntityManagerInterface $entityManager, PostRepository $postRepository){
+
         try{
             $request = $this->transformJsonBody($request);
 
-            if (!$request || !$request->get('name') || !$request->get('description')) {
+            if (!$request || !$request->get('name') || !$request->request->get('description')){
                 throw new \Exception();
             }
 
             $post = new Post();
             $post->setName($request->get('name'));
             $post->setDescription($request->get('description'));
-
             $entityManager->persist($post);
             $entityManager->flush();
-
 
             $data = [
                 'status' => 200,
@@ -52,7 +64,6 @@ class PostController extends AbstractController
             return $this->response($data);
 
         }catch (\Exception $e){
-            dd($e);
             $data = [
                 'status' => 422,
                 'errors' => "Data no valid",
@@ -64,6 +75,9 @@ class PostController extends AbstractController
 
 
     /**
+     * @param PostRepository $postRepository
+     * @param $id
+     * @return JsonResponse
      * @Route("/posts/{id}", name="posts_get", methods={"GET"})
      */
     public function getPost(PostRepository $postRepository, $id){
@@ -80,6 +94,11 @@ class PostController extends AbstractController
     }
 
     /**
+     * @param Request $request
+     * @param EntityManagerInterface $entityManager
+     * @param PostRepository $postRepository
+     * @param $id
+     * @return JsonResponse
      * @Route("/posts/{id}", name="posts_put", methods={"PUT"})
      */
     public function updatePost(Request $request, EntityManagerInterface $entityManager, PostRepository $postRepository, $id){
@@ -123,6 +142,9 @@ class PostController extends AbstractController
 
 
     /**
+     * @param PostRepository $postRepository
+     * @param $id
+     * @return JsonResponse
      * @Route("/posts/{id}", name="posts_delete", methods={"DELETE"})
      */
     public function deletePost(EntityManagerInterface $entityManager, PostRepository $postRepository, $id){
@@ -145,6 +167,18 @@ class PostController extends AbstractController
         return $this->response($data);
     }
 
+
+
+
+
+    /**
+     * Returns a JSON response
+     *
+     * @param array $data
+     * @param $status
+     * @param array $headers
+     * @return JsonResponse
+     */
     public function response($data, $status = 200, $headers = [])
     {
         return new JsonResponse($data, $status, $headers);
