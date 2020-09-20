@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: hicham benkachoud
- * Date: 05/01/2020
- * Time: 22:07
- */
 
 namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;

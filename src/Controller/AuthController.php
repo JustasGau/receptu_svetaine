@@ -9,6 +9,8 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\HttpFoundation\Response;
+
 
 class AuthController extends ApiController
 {
@@ -36,14 +38,20 @@ class AuthController extends ApiController
         return $this->respondWithSuccess(sprintf('User %s successfully created', $user->getUsername()));
     }
 
+
     /**
+     * @param Request $request
+     * @param UserInterface|null $user
      * @param JWTTokenManagerInterface $JWTManager
      * @return JsonResponse
      */
-    public function getTokenUser(JWTTokenManagerInterface $JWTManager)
+    public function getTokenUser(Request $request, UserInterface $user = null, JWTTokenManagerInterface $JWTManager)
     {
-        $user = $this->getUser();
-        return new JsonResponse(['token' => $JWTManager->create($user)]);
+        if (0 === strpos($request->headers->get('Content-Type'), 'application/json')) {
+            return new JsonResponse(['token' => $JWTManager->create($user)]);
+        }else{
+            return new Response('Invalid api request. Please use json format', Response::HTTP_NOT_FOUND);
+        }
     }
 
 }
