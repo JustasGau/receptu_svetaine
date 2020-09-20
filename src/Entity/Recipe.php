@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass=RecipeRepository::class)
  */
-class Recipe
+class Recipe implements \JsonSerializable
 {
     /**
      * @ORM\Id
@@ -45,9 +45,15 @@ class Recipe
      */
     private $Ingredient;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="recipe", orphanRemoval=true)
+     */
+    private $Comment;
+
     public function __construct()
     {
         $this->Ingredient = new ArrayCollection();
+        $this->Comment = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -133,4 +139,57 @@ class Recipe
 
         return $this;
     }
+
+    /**
+     * @return Collection|Comment[]
+     */
+    public function getComment(): Collection
+    {
+        return $this->Comment;
+    }
+
+    public function addComment(Comment $comment): self
+    {
+        if (!$this->Comment->contains($comment)) {
+            $this->Comment[] = $comment;
+            $comment->setRecipe($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comment $comment): self
+    {
+        if ($this->Comment->contains($comment)) {
+            $this->Comment->removeElement($comment);
+            // set the owning side to null (unless already changed)
+            if ($comment->getRecipe() === $this) {
+                $comment->setRecipe(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @ORM\PrePersist()
+     */
+    public function beforeSave(){
+
+        $this->Date = new \DateTime('now', new \DateTimeZone('Europe/Vilnius'));
+    }
+
+    public function jsonSerialize()
+    {
+        return [
+            "name" => $this->getName(),
+            "user" => $this->getUser(),
+            "date" => $this->getDate(),
+            "text" => $this->getText(),
+            "ingredients"=> $this->getIngredient(),
+            "comments"=> $this->getComment()
+        ];
+    }
+
+
 }

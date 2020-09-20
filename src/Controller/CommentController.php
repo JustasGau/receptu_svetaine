@@ -1,132 +1,126 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: hicham benkachoud
- * Date: 02/01/2020
- * Time: 22:44
- */
+
 
 namespace App\Controller;
 
 
-use App\Entity\Post;
-use App\Repository\PostRepository;
+use App\Entity\Comment;
+use App\Repository\CommentRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * Class PostController
- * @package App\Controller
- * @Route("/api", name="post_api")
- */
-class PostController extends AbstractController
+class CommentController extends AbstractController
 {
+
     /**
-     * @param PostRepository $postRepository
      * @return JsonResponse
-     * @Route("/posts", name="posts", methods={"GET"})
+     * @Route("/comments", name="comments", methods={"GET"})
      */
-    public function getPosts(PostRepository $postRepository){
-        $data = $postRepository->findAll();
+    public function getPosts(CommentRepository $commentRepository){
+        $data = $commentRepository->findAll();
         return $this->response($data);
     }
 
     /**
-     * @param Request $request
-     * @param EntityManagerInterface $entityManager
-     * @param PostRepository $postRepository
      * @return JsonResponse
      * @throws \Exception
-     * @Route("/posts", name="posts_add", methods={"POST"})
+     * @Route("/comments", name="comments_add", methods={"POST"})
      */
-    public function addPost(Request $request, EntityManagerInterface $entityManager, PostRepository $postRepository){
+    public function addComment(Request $request, EntityManagerInterface $entityManager){
 
         try{
             $request = $this->transformJsonBody($request);
 
-            if (!$request || !$request->get('name') || !$request->request->get('description')){
+            if (!$request ||
+                !$request->get('text') ||
+                !$request->get('user') ||
+                !$request->get('recipe'))
+            {
                 throw new \Exception();
             }
 
-            $post = new Post();
-            $post->setName($request->get('name'));
-            $post->setDescription($request->get('description'));
-            $entityManager->persist($post);
+            $comment = new Comment();
+            $comment->setText($request->get('text'));
+            $comment->setRecipe($request->get('user'));
+            $comment->setRecipe($request->get('recipe'));
+            $entityManager->persist($comment);
             $entityManager->flush();
 
             $data = [
                 'status' => 200,
-                'success' => "Post added successfully",
+                'success' => "Comment added successfully",
             ];
             return $this->response($data);
 
         }catch (\Exception $e){
             $data = [
                 'status' => 422,
-                'errors' => "Data no valid",
+                'errors' => "Data not valid",
             ];
             return $this->response($data, 422);
         }
-
     }
 
-
     /**
-     * @param PostRepository $postRepository
+     * @param CommentRepository $commentRepository
      * @param $id
      * @return JsonResponse
-     * @Route("/posts/{id}", name="posts_get", methods={"GET"})
+     * @Route("/comments/{id}", name="comments_get", methods={"GET"})
      */
-    public function getPost(PostRepository $postRepository, $id){
-        $post = $postRepository->find($id);
+    public function getComments(CommentRepository $commentRepository, $id){
+        $comment = $commentRepository->find($id);
 
-        if (!$post){
+        if (!$comment){
             $data = [
                 'status' => 404,
-                'errors' => "Post not found",
+                'errors' => "Comment not found",
             ];
             return $this->response($data, 404);
         }
-        return $this->response($post);
+        return $this->response($comment);
     }
 
     /**
      * @param Request $request
      * @param EntityManagerInterface $entityManager
-     * @param PostRepository $postRepository
+     * @param CommentRepository $commentRepository
      * @param $id
      * @return JsonResponse
-     * @Route("/posts/{id}", name="posts_put", methods={"PUT"})
+     * @Route("/comments/{id}", name="comments_put", methods={"PUT"})
      */
-    public function updatePost(Request $request, EntityManagerInterface $entityManager, PostRepository $postRepository, $id){
+    public function updateComments(Request $request, EntityManagerInterface $entityManager, CommentRepository $commentRepository, $id){
 
         try{
-            $post = $postRepository->find($id);
+            $comment = $commentRepository->find($id);
 
-            if (!$post){
+            if (!$comment){
                 $data = [
                     'status' => 404,
-                    'errors' => "Post not found",
+                    'errors' => "Comment not found",
                 ];
                 return $this->response($data, 404);
             }
 
             $request = $this->transformJsonBody($request);
 
-            if (!$request || !$request->get('name') || !$request->request->get('description')){
+            if (!$request ||
+                !$request->get('text') ||
+                !$request->get('user') ||
+                !$request->get('recipe'))
+            {
                 throw new \Exception();
             }
 
-            $post->setName($request->get('name'));
-            $post->setDescription($request->get('description'));
+            $comment->setText($request->get('text'));
+            $comment->setRecipe($request->get('user'));
+            $comment->setRecipe($request->get('recipe'));
             $entityManager->flush();
 
             $data = [
                 'status' => 200,
-                'errors' => "Post updated successfully",
+                'errors' => "Comment updated successfully",
             ];
             return $this->response($data);
 
@@ -140,29 +134,29 @@ class PostController extends AbstractController
 
     }
 
-
     /**
-     * @param PostRepository $postRepository
+     * @param EntityManagerInterface $entityManager
+     * @param CommentRepository $commentRepository
      * @param $id
      * @return JsonResponse
-     * @Route("/posts/{id}", name="posts_delete", methods={"DELETE"})
+     * @Route("/comments/{id}", name="comments_delete", methods={"DELETE"})
      */
-    public function deletePost(EntityManagerInterface $entityManager, PostRepository $postRepository, $id){
-        $post = $postRepository->find($id);
+    public function deleteComments(EntityManagerInterface $entityManager, CommentRepository $commentRepository, $id){
+        $comment = $commentRepository->find($id);
 
-        if (!$post){
+        if (!$comment){
             $data = [
                 'status' => 404,
-                'errors' => "Post not found",
+                'errors' => "Comment not found",
             ];
             return $this->response($data, 404);
         }
 
-        $entityManager->remove($post);
+        $entityManager->remove($comment);
         $entityManager->flush();
         $data = [
             'status' => 200,
-            'errors' => "Post deleted successfully",
+            'errors' => "Comment deleted successfully",
         ];
         return $this->response($data);
     }
@@ -192,5 +186,4 @@ class PostController extends AbstractController
 
         return $request;
     }
-
 }

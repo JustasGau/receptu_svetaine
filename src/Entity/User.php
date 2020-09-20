@@ -48,6 +48,11 @@ class User implements UserInterface
     private $Recipes;
 
     /**
+     * @ORM\Column(type="boolean")
+     */
+    private $banned;
+
+    /**
      * User constructor.
      * @param $username
      */
@@ -183,6 +188,18 @@ class User implements UserInterface
                 $recipe->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getBanned(): ?bool
+    {
+        return $this->banned;
+    }
+
+    public function setBanned(bool $banned): self
+    {
+        $this->banned = $banned;
 
         return $this;
     }

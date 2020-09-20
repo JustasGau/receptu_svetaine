@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass=CommentRepository::class)
  */
-class Comment
+class Comment implements \JsonSerializable
 {
     /**
      * @ORM\Id
@@ -30,7 +30,13 @@ class Comment
     /**
      * @ORM\Column(type="datetime")
      */
-    private $PostDate;
+    private $date;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Recipe::class, inversedBy="Comment")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $recipe;
 
     public function getId(): ?int
     {
@@ -61,15 +67,46 @@ class Comment
         return $this;
     }
 
-    public function getPostDate(): ?\DateTimeInterface
+    public function getDate(): ?\DateTimeInterface
     {
-        return $this->PostDate;
+        return $this->Date;
     }
 
-    public function setPostDate(\DateTimeInterface $PostDate): self
+    public function setDate(\DateTimeInterface $date): self
     {
-        $this->PostDate = $PostDate;
+        $this->date = $date;
 
         return $this;
     }
+
+    public function getRecipe(): ?Recipe
+    {
+        return $this->recipe;
+    }
+
+    public function setRecipe(?Recipe $recipe): self
+    {
+        $this->recipe = $recipe;
+
+        return $this;
+    }
+
+    /**
+     * @ORM\PrePersist()
+     */
+    public function beforeSave(){
+
+        $this->date = new \DateTime('now', new \DateTimeZone('Europe/Vilnius'));
+    }
+
+    public function jsonSerialize()
+    {
+        return [
+            "text" => $this->getText(),
+            "date" => $this->getDate(),
+            "user" => $this->getUser(),
+            "recipe"=> $this->getRecipe()
+        ];
+    }
+
 }

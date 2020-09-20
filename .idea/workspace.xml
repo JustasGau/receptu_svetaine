@@ -21,9 +21,12 @@
   <component name="ChangeListManager">
     <list default="true" id="94d31ea5-7d0d-4ae0-b8cf-037b0d4068e6" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Aaa.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/PostController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/PostController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Comment.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Comment.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Ingredients.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Ingredients.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Recipe.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Recipe.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/AaaRepository.php" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -140,7 +143,7 @@
       <option name="presentableId" value="Default" />
       <updated>1600266328757</updated>
       <workItem from="1600266329822" duration="8420000" />
-      <workItem from="1600583676428" duration="1153000" />
+      <workItem from="1600583676428" duration="5355000" />
     </task>
     <servers />
   </component>
@@ -163,17 +166,30 @@
       <screen x="1680" y="0" width="1440" height="900" />
     </state>
     <state x="2173" y="329" width="444" height="249" key="#Composer/72.27.1608.1023/1680.0.1440.900@1680.0.1440.900" timestamp="1600266344349" />
-    <state x="2142" y="169" width="537" height="582" key="NewPhpClassDialog" timestamp="1600276499007">
-      <screen x="1680" y="0" width="1440" height="900" />
+    <state x="609" y="296" width="524" height="491" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1600589756084">
+      <screen x="72" y="27" width="1608" height="1023" />
+    </state>
+    <state x="609" y="296" width="524" height="491" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/72.27.1608.1023/1680.0.1440.900@72.27.1608.1023" timestamp="1600589756084" />
+    <state x="588" y="219" width="609" height="662" key="NewPhpClassDialog" timestamp="1600587072287">
+      <screen x="72" y="27" width="1608" height="1023" />
     </state>
     <state x="2142" y="169" width="537" height="582" key="NewPhpClassDialog/72.27.1608.1023/1680.0.1440.900@1680.0.1440.900" timestamp="1600276499007" />
+    <state x="588" y="219" width="609" height="662" key="NewPhpClassDialog/72.27.1608.1023/1680.0.1440.900@72.27.1608.1023" timestamp="1600587072287" />
     <state x="1889" y="85" width="1022" height="737" key="SettingsEditor" timestamp="1600266371669">
       <screen x="1680" y="0" width="1440" height="900" />
     </state>
     <state x="1889" y="85" width="1022" height="737" key="SettingsEditor/72.27.1608.1023/1680.0.1440.900@1680.0.1440.900" timestamp="1600266371669" />
+    <state x="657" y="453" width="438" height="177" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1600587177047">
+      <screen x="72" y="27" width="1608" height="1023" />
+    </state>
+    <state x="657" y="453" width="438" height="177" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/72.27.1608.1023/1680.0.1440.900@72.27.1608.1023" timestamp="1600587177047" />
     <state x="2091" y="189" width="618" height="522" key="find.popup" timestamp="1600276154540">
       <screen x="1680" y="0" width="1440" height="900" />
     </state>
     <state x="2091" y="189" width="618" height="522" key="find.popup/72.27.1608.1023/1680.0.1440.900@1680.0.1440.900" timestamp="1600276154540" />
+    <state x="540" y="244" key="run.anything.popup" timestamp="1600589136753">
+      <screen x="72" y="27" width="1608" height="1023" />
+    </state>
+    <state x="540" y="244" key="run.anything.popup/72.27.1608.1023/1680.0.1440.900@72.27.1608.1023" timestamp="1600589136753" />
   </component>
 </project>

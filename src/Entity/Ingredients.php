@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass=IngredientsRepository::class)
  */
-class Ingredients
+class Ingredients implements \JsonSerializable
 {
     /**
      * @ORM\Id
@@ -89,5 +89,15 @@ class Ingredients
         $this->Recipe = $Recipe;
 
         return $this;
+    }
+
+    public function jsonSerialize()
+    {
+        return [
+            "name" => $this->getName(),
+            "calories" => $this->getCalories(),
+            "sugar" => $this->getSugar(),
+            "recipe"=> $this->getRecipe()
+        ];
     }
 }
