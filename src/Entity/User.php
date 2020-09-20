@@ -7,6 +7,8 @@
  */
 
 namespace App\Entity;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 /**
@@ -36,12 +38,24 @@ class User implements UserInterface
     private $email;
 
     /**
+     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="User")
+     */
+    private $Comments;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Recipe::class, mappedBy="User")
+     */
+    private $Recipes;
+
+    /**
      * User constructor.
      * @param $username
      */
     public function __construct($username)
     {
         $this->username = $username;
+        $this->Comments = new ArrayCollection();
+        $this->Recipes = new ArrayCollection();
     }
 
     /**
@@ -109,5 +123,67 @@ class User implements UserInterface
 
     public function eraseCredentials()
     {
+    }
+
+    /**
+     * @return Collection|Comment[]
+     */
+    public function getComments(): Collection
+    {
+        return $this->Comments;
+    }
+
+    public function addComment(Comment $comment): self
+    {
+        if (!$this->Comments->contains($comment)) {
+            $this->Comments[] = $comment;
+            $comment->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comment $comment): self
+    {
+        if ($this->Comments->contains($comment)) {
+            $this->Comments->removeElement($comment);
+            // set the owning side to null (unless already changed)
+            if ($comment->getUser() === $this) {
+                $comment->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Recipe[]
+     */
+    public function getRecipes(): Collection
+    {
+        return $this->Recipes;
+    }
+
+    public function addRecipe(Recipe $recipe): self
+    {
+        if (!$this->Recipes->contains($recipe)) {
+            $this->Recipes[] = $recipe;
+            $recipe->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRecipe(Recipe $recipe): self
+    {
+        if ($this->Recipes->contains($recipe)) {
+            $this->Recipes->removeElement($recipe);
+            // set the owning side to null (unless already changed)
+            if ($recipe->getUser() === $this) {
+                $recipe->setUser(null);
+            }
+        }
+
+        return $this;
     }
 }
