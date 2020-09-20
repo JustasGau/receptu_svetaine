@@ -10,10 +10,14 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * @package App\Controller
+ * @Route("/api", name="ingredients_api")
+ */
 class IngredientsController extends AbstractController
 {
-
     /**
      * @return JsonResponse
      * @Route("/ingredients", name="ingredients", methods={"GET"})

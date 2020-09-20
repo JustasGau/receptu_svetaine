@@ -203,4 +203,12 @@ class User implements UserInterface
 
         return $this;
     }
+
+    /**
+     * @ORM\PrePersist()
+     */
+    public function beforeSave(){
+
+        $this->banned = false;
+    }
 }
