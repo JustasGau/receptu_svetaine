@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=IngredientsRepository::class)
+ * @ORM\HasLifecycleCallbacks()
  */
 class Ingredients implements \JsonSerializable
 {
@@ -37,6 +38,11 @@ class Ingredients implements \JsonSerializable
      * @ORM\JoinColumn(nullable=false)
      */
     private $Recipe;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $amount;
 
     public function getId(): ?int
     {
@@ -94,10 +100,24 @@ class Ingredients implements \JsonSerializable
     public function jsonSerialize()
     {
         return [
+            "id" => $this->getId(),
             "name" => $this->getName(),
             "calories" => $this->getCalories(),
             "sugar" => $this->getSugar(),
-            "recipe"=> $this->getRecipe()
+            "recipe" => $this->getRecipe(),
+            "amount" => $this->getAmount()
         ];
+    }
+
+    public function getAmount(): ?int
+    {
+        return $this->amount;
+    }
+
+    public function setAmount(int $amount): self
+    {
+        $this->amount = $amount;
+
+        return $this;
     }
 }

@@ -32,7 +32,6 @@ class AuthController extends ApiController
         $user->setPassword($encoder->encodePassword($user, $password));
         $user->setEmail($email);
         $user->setUsername($username);
-        $user->setBanned(false);
         $em->persist($user);
         $em->flush();
         return $this->respondWithSuccess(sprintf('User %s successfully created', $user->getUsername()));

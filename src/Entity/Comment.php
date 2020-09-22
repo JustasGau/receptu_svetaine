@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=CommentRepository::class)
+ * @ORM\HasLifecycleCallbacks()
  */
 class Comment implements \JsonSerializable
 {
@@ -69,7 +70,7 @@ class Comment implements \JsonSerializable
 
     public function getDate(): ?\DateTimeInterface
     {
-        return $this->Date;
+        return $this->date;
     }
 
     public function setDate(\DateTimeInterface $date): self
@@ -102,6 +103,7 @@ class Comment implements \JsonSerializable
     public function jsonSerialize()
     {
         return [
+            "id" => $this->getId(),
             "text" => $this->getText(),
             "date" => $this->getDate(),
             "user" => $this->getUser(),

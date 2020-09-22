@@ -6,6 +6,7 @@ namespace App\Controller;
 
 use App\Entity\Ingredients;
 use App\Repository\IngredientsRepository;
+use App\Repository\RecipeRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -28,27 +29,41 @@ class IngredientsController extends AbstractController
     }
 
     /**
+     * @param Request $request
+     * @param EntityManagerInterface $entityManager
+     * @param RecipeRepository $recipeRepository
      * @return JsonResponse
-     * @throws \Exception
      * @Route("/ingredients", name="ingredients_add", methods={"POST"})
      */
-    public function addIngredient(Request $request, EntityManagerInterface $entityManager){
+    public function addIngredient(Request $request, EntityManagerInterface $entityManager, RecipeRepository $recipeRepository){
 
         try{
             $request = $this->transformJsonBody($request);
 
             if (!$request ||
                 !$request->get('name') ||
-                !$request->get('recipe'))
+                !$request->get('recipe')||
+                !$request->get('amount'))
             {
                 throw new \Exception();
+            }
+            $recipe = $recipeRepository->find($request->get('recipe'));
+            if (!$recipe){
+                $data = [
+                    'status' => 404,
+                    'errors' => "Recipe not found",
+                ];
+                return $this->response($data, 404);
             }
 
             $ingredient = new Ingredients();
             $ingredient->setName($request->get('name'));
-            $ingredient->setRecipe($request->get('recipe'));
-            $ingredient->setCalories($request->get('calories'));
-            $ingredient->setSugar($request->get('sugar'));
+            $ingredient->setRecipe($recipe);
+            $ingredient->setAmount($request->get('amount'));
+            if ($request->get('calories'))
+                $ingredient->setCalories($request->get('calories'));
+            if ($request->get('sugar'))
+                $ingredient->setSugar($request->get('sugar'));
             $entityManager->persist($ingredient);
             $entityManager->flush();
 
@@ -59,6 +74,7 @@ class IngredientsController extends AbstractController
             return $this->response($data);
 
         }catch (\Exception $e){
+            dd($e);
             $data = [
                 'status' => 422,
                 'errors' => "Data not valid",
@@ -110,16 +126,14 @@ class IngredientsController extends AbstractController
 
             $request = $this->transformJsonBody($request);
 
-            if (!$request ||
-                !$request->get('name') ||
-                !$request->get('recipe'))
-            {
-                throw new \Exception();
-            }
-
-            $ingredient->setName($request->get('name'));
-            $ingredient->setCalories($request->get('calories'));
-            $ingredient->setSugar($request->get('sugar'));
+            if ($request->get('name'))
+                $ingredient->setName($request->get('name'));
+            if ($request->get('amount'))
+                $ingredient->setAmount($request->get('amount'));
+            if ($request->get('calories'))
+                $ingredient->setCalories($request->get('calories'));
+            if ($request->get('sugar'))
+                $ingredient->setSugar($request->get('sugar'));
             $entityManager->flush();
 
             $data = [

@@ -1,5 +1,5 @@
 register:
-  path: /api/register
+  path: /register
   controller: App\Controller\AuthController::register
   methods: POST
 

@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=RecipeRepository::class)
+ * @ORM\HasLifecycleCallbacks()
  */
 class Recipe implements \JsonSerializable
 {
@@ -182,6 +183,7 @@ class Recipe implements \JsonSerializable
     public function jsonSerialize()
     {
         return [
+            "id" => $this->getId(),
             "name" => $this->getName(),
             "user" => $this->getUser(),
             "date" => $this->getDate(),

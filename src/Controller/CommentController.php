@@ -6,6 +6,7 @@ namespace App\Controller;
 
 use App\Entity\Comment;
 use App\Repository\CommentRepository;
+use App\Repository\RecipeRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -18,8 +19,8 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class CommentController extends AbstractController
 {
-
     /**
+     * @param CommentRepository $commentRepository
      * @return JsonResponse
      * @Route("/comments", name="comments", methods={"GET"})
      */
@@ -29,27 +30,37 @@ class CommentController extends AbstractController
     }
 
     /**
+     * @param Request $request
+     * @param EntityManagerInterface $entityManager
+     * @param RecipeRepository $recipeRepository
      * @return JsonResponse
-     * @throws \Exception
      * @Route("/comments", name="comments_add", methods={"POST"})
      */
-    public function addComment(Request $request, EntityManagerInterface $entityManager){
+    public function addComment(Request $request, EntityManagerInterface $entityManager, RecipeRepository $recipeRepository){
 
         try{
             $request = $this->transformJsonBody($request);
 
             if (!$request ||
                 !$request->get('text') ||
-                !$request->get('user') ||
                 !$request->get('recipe'))
             {
                 throw new \Exception();
             }
 
+            $recipe = $recipeRepository->find($request->get('recipe'));
+            if (!$recipe){
+                $data = [
+                    'status' => 404,
+                    'errors' => "Recipe not found",
+                ];
+                return $this->response($data, 404);
+            }
+
             $comment = new Comment();
             $comment->setText($request->get('text'));
-            $comment->setRecipe($request->get('user'));
-            $comment->setRecipe($request->get('recipe'));
+            $comment->setUser($this->getUser());
+            $comment->setRecipe($recipe);
             $entityManager->persist($comment);
             $entityManager->flush();
 
@@ -110,17 +121,12 @@ class CommentController extends AbstractController
 
             $request = $this->transformJsonBody($request);
 
-            if (!$request ||
-                !$request->get('text') ||
-                !$request->get('user') ||
-                !$request->get('recipe'))
+            if (!$request || !$request->get('text'))
             {
                 throw new \Exception();
             }
-
-            $comment->setText($request->get('text'));
-            $comment->setRecipe($request->get('user'));
-            $comment->setRecipe($request->get('recipe'));
+            if ($comment->setText($request->get('text')))
+                $comment->setText($request->get('text'));
             $entityManager->flush();
 
             $data = [

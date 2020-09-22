@@ -6,6 +6,7 @@ namespace App\Controller;
 
 use App\Entity\Recipe;
 use App\Repository\RecipeRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -19,38 +20,47 @@ use Symfony\Component\Routing\Annotation\Route;
 class RecipeController extends AbstractController
 {
     /**
+     * @param RecipeRepository $recipeRepository
      * @return JsonResponse
      * @Route("/recipes", name="recipes", methods={"GET"})
      */
-    public function getPosts(RecipeRepository $recipeRepository){
+    public function getRecipes(RecipeRepository $recipeRepository){
         $data = $recipeRepository->findAll();
         return $this->response($data);
     }
 
     /**
+     * @param Request $request
+     * @param EntityManagerInterface $entityManager
+     * @param $userRepository
      * @return JsonResponse
      * @throws \Exception
      * @Route("/recipes", name="recipes_add", methods={"POST"})
      */
-    public function addRecipe(Request $request, EntityManagerInterface $entityManager){
+    public function addRecipe(Request $request, EntityManagerInterface $entityManager, UserRepository $userRepository){
 
         try{
             $request = $this->transformJsonBody($request);
 
             if (!$request ||
                 !$request->get('name') ||
-                !$request->get('user') ||
-                !$request->get('text') ||
-                !$request->get('ingredients'))
+                !$request->get('text'))
             {
                 throw new \Exception();
             }
 
+//            $user = $userRepository->find($request->get('user'));
+//            if (!$user){
+//                $data = [
+//                    'status' => 404,
+//                    'errors' => "User not found",
+//                ];
+//                return $this->response($data, 404);
+//            }
             $recipe = new Recipe();
             $recipe->setName($request->get('name'));
-            $recipe->setUser($request->get('user'));
+            $recipe->setUser($this->getUser());
             $recipe->setText($request->get('text'));
-            $recipe->addIngredient($request->get('ingredients'));
             $entityManager->persist($recipe);
             $entityManager->flush();
 
@@ -61,6 +71,7 @@ class RecipeController extends AbstractController
             return $this->response($data);
 
         }catch (\Exception $e){
+            dd($e);
             $data = [
                 'status' => 422,
                 'errors' => "Data not valid",
@@ -75,7 +86,7 @@ class RecipeController extends AbstractController
      * @return JsonResponse
      * @Route("/recipes/{id}", name="recipes_get", methods={"GET"})
      */
-    public function getRecipes(RecipeRepository $recipeRepository, $id){
+    public function getRecipe(RecipeRepository $recipeRepository, $id){
         $recipe = $recipeRepository->find($id);
 
         if (!$recipe){
@@ -96,7 +107,8 @@ class RecipeController extends AbstractController
      * @return JsonResponse
      * @Route("/recipes/{id}", name="recipes_put", methods={"PUT"})
      */
-    public function updateRecipe(Request $request, EntityManagerInterface $entityManager, RecipeRepository $recipeRepository, $id){
+    public function updateRecipe(Request $request, EntityManagerInterface $entityManager, UserRepository $userRepository,
+                                 RecipeRepository $recipeRepository, $id){
 
         try{
             $recipe = $recipeRepository->find($id);
@@ -111,19 +123,10 @@ class RecipeController extends AbstractController
 
             $request = $this->transformJsonBody($request);
 
-            if (!$request ||
-                !$request->get('name') ||
-                !$request->get('user') ||
-                !$request->get('text') ||
-                !$request->get('ingredients'))
-            {
-                throw new \Exception();
-            }
-
-            $recipe->setName($request->get('name'));
-            $recipe->setUser($request->get('user'));
-            $recipe->setText($request->get('text'));
-            $recipe->addIngredient($request->get('ingredients'));
+            if ($request->get('name'))
+                $recipe->setName($request->get('name'));
+            if ($request->get('text'))
+                $recipe->setText($request->get('text'));
             $entityManager->flush();
 
             $data = [
@@ -147,9 +150,9 @@ class RecipeController extends AbstractController
      * @param RecipeRepository $recipeRepository
      * @param $id
      * @return JsonResponse
-     * @Route("/ingredients/{id}", name="ingredients_delete", methods={"DELETE"})
+     * @Route("/recipes/{id}", name="recipes_delete", methods={"DELETE"})
      */
-    public function deleteIngredients(EntityManagerInterface $entityManager, RecipeRepository $recipeRepository, $id){
+    public function deleteRecipe(EntityManagerInterface $entityManager, RecipeRepository $recipeRepository, $id){
         $recipe = $recipeRepository->find($id);
 
         if (!$recipe){

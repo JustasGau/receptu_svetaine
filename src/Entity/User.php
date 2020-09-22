@@ -1,15 +1,18 @@
 <?php
 
 namespace App\Entity;
+
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+
 /**
  * @ORM\Table(name="users")
  * @ORM\Entity
+ * * @ORM\HasLifecycleCallbacks()
  */
-class User implements UserInterface
+class User implements UserInterface, \JsonSerializable
 {
     /**
      * @ORM\Column(type="integer")
@@ -45,6 +48,11 @@ class User implements UserInterface
      * @ORM\Column(type="boolean")
      */
     private $banned;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $roles;
 
     /**
      * User constructor.
@@ -117,7 +125,8 @@ class User implements UserInterface
      */
     public function getRoles()
     {
-        return array('ROLE_USER');
+        $role = $this->roles;
+        return array($role);
     }
 
     public function eraseCredentials()
@@ -204,5 +213,20 @@ class User implements UserInterface
     public function beforeSave(){
 
         $this->banned = false;
+        $this->roles = 'ROLE_USER';
+    }
+
+    public function setRoles(string $roles): self
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    public function jsonSerialize()
+    {
+        return [
+            "name" => $this->getUsername()
+        ];
     }
 }
