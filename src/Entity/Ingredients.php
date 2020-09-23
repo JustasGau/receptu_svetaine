@@ -104,7 +104,7 @@ class Ingredients implements \JsonSerializable
             "name" => $this->getName(),
             "calories" => $this->getCalories(),
             "sugar" => $this->getSugar(),
-            "recipe" => $this->getRecipe(),
+            "recipe" => $this->getRecipe()->getId(),
             "amount" => $this->getAmount()
         ];
     }

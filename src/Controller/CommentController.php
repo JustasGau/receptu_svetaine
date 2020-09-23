@@ -61,6 +61,7 @@ class CommentController extends AbstractController
             $comment->setText($request->get('text'));
             $comment->setUser($this->getUser());
             $comment->setRecipe($recipe);
+            $recipe->addComment($comment);
             $entityManager->persist($comment);
             $entityManager->flush();
 

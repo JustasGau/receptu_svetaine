@@ -107,7 +107,7 @@ class Comment implements \JsonSerializable
             "text" => $this->getText(),
             "date" => $this->getDate(),
             "user" => $this->getUser(),
-            "recipe"=> $this->getRecipe()
+            "recipe"=> $this->getRecipe()->getId()
         ];
     }
 

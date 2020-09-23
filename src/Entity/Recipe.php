@@ -43,6 +43,7 @@ class Recipe implements \JsonSerializable
 
     /**
      * @ORM\OneToMany(targetEntity=Ingredients::class, mappedBy="Recipe", orphanRemoval=true)
+     *
      */
     private $Ingredient;
 
@@ -188,8 +189,7 @@ class Recipe implements \JsonSerializable
             "user" => $this->getUser(),
             "date" => $this->getDate(),
             "text" => $this->getText(),
-            "ingredients"=> $this->getIngredient(),
-            "comments"=> $this->getComment()
+            "aaaa" => $this->getComment()
         ];
     }
 

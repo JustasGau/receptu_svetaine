@@ -5,6 +5,8 @@ namespace App\Controller;
 
 
 use App\Entity\Recipe;
+use App\Repository\CommentRepository;
+use App\Repository\IngredientsRepository;
 use App\Repository\RecipeRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -57,6 +59,13 @@ class RecipeController extends AbstractController
 //                ];
 //                return $this->response($data, 404);
 //            }
+            if($this->getUser()->getBanned() == true) {
+                $data = [
+                    'status' => 403,
+                    'errors' => "User is forbidden from posting",
+                ];
+                return $this->response($data, 403);
+            }
             $recipe = new Recipe();
             $recipe->setName($request->get('name'));
             $recipe->setUser($this->getUser());
@@ -97,6 +106,45 @@ class RecipeController extends AbstractController
             return $this->response($data, 404);
         }
         return $this->response($recipe);
+    }
+    /**
+     * @param RecipeRepository $recipeRepository
+     * @param $id
+     * @return JsonResponse
+     * @Route("/recipes/{id}/comments", name="recipes_get_comemnts", methods={"GET"})
+     */
+    public function getRecipeComments(RecipeRepository $recipeRepository, CommentRepository $commentRepository, $id){
+        $recipe = $recipeRepository->find($id);
+        if (!$recipe){
+            $data = [
+                'status' => 404,
+                'errors' => "Recipe not found",
+            ];
+            return $this->response($data, 404);
+        }
+
+        $comments = $commentRepository->findRecipeComments($id);
+
+        return $this->response($comments);
+    }
+    /**
+     * @param RecipeRepository $recipeRepository
+     * @param $id
+     * @return JsonResponse
+     * @Route("/recipes/{id}/ingredients", name="recipes_get_ingredients", methods={"GET"})
+     */
+    public function getRecipeIngredients(RecipeRepository $recipeRepository, IngredientsRepository $ingredientsRepository, $id){
+        $recipe = $recipeRepository->find($id);
+
+        if (!$recipe){
+            $data = [
+                'status' => 404,
+                'errors' => "Recipe not found",
+            ];
+            return $this->response($data, 404);
+        }
+        $ing = $ingredientsRepository->findRecipeIngredients($id);
+        return $this->response($ing);
     }
 
     /**
