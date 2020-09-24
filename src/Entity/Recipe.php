@@ -188,8 +188,7 @@ class Recipe implements \JsonSerializable
             "name" => $this->getName(),
             "user" => $this->getUser(),
             "date" => $this->getDate(),
-            "text" => $this->getText(),
-            "aaaa" => $this->getComment()
+            "text" => $this->getText()
         ];
     }
 
