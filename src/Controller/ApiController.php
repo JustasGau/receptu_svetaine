@@ -101,6 +101,19 @@ class ApiController extends AbstractController
     }
 
     /**
+     * Returns a 403 Forbidden http response
+     *
+     * @param string $message
+     *
+     * @return JsonResponse
+     */
+    public function respondForbidden($message = 'Forbidden!')
+    {
+        return $this->setStatusCode(403)->respondWithErrors($message);
+    }
+
+
+    /**
      * Returns a 422 Unprocessable Entity
      *
      * @param string $message

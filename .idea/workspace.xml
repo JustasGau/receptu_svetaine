@@ -20,7 +20,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="94d31ea5-7d0d-4ae0-b8cf-037b0d4068e6" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/AuthController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/AuthController.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -143,6 +145,7 @@
       <workItem from="1600789797158" duration="9782000" />
       <workItem from="1600873232546" duration="4373000" />
       <workItem from="1600966099741" duration="824000" />
+      <workItem from="1601481374158" duration="1937000" />
     </task>
     <servers />
   </component>
@@ -188,10 +191,10 @@
       <screen x="72" y="27" width="1608" height="1023" />
     </state>
     <state x="657" y="453" width="438" height="177" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/72.27.1608.1023/1680.0.1440.900@72.27.1608.1023" timestamp="1600587177047" />
-    <state x="2115" y="189" width="821" height="522" key="find.popup" timestamp="1600966679389">
+    <state x="2115" y="189" width="821" height="522" key="find.popup" timestamp="1601483157359">
       <screen x="1680" y="0" width="1440" height="900" />
     </state>
-    <state x="2115" y="189" width="821" height="522" key="find.popup/72.27.1608.1023/1680.0.1440.900@1680.0.1440.900" timestamp="1600966679389" />
+    <state x="2115" y="189" width="821" height="522" key="find.popup/72.27.1608.1023/1680.0.1440.900@1680.0.1440.900" timestamp="1601483157359" />
     <state x="540" y="244" key="run.anything.popup" timestamp="1600589136753">
       <screen x="72" y="27" width="1608" height="1023" />
     </state>
