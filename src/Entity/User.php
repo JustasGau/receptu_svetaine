@@ -68,6 +68,14 @@ class User implements UserInterface, \JsonSerializable
     /**
      * @return string
      */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return string
+     */
     public function getUsername()
     {
         return $this->username;
@@ -226,6 +234,7 @@ class User implements UserInterface, \JsonSerializable
     public function jsonSerialize()
     {
         return [
+            "id" => $this->getId(),
             "name" => $this->getUsername()
         ];
     }

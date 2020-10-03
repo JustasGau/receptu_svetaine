@@ -20,14 +20,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="94d31ea5-7d0d-4ae0-b8cf-037b0d4068e6" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/receptu_svetaine.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/receptu_svetaine.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/packages/framework.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/framework.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/ApiController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ApiController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/AuthController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/AuthController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/CommentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/CommentController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/IngredientsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/IngredientsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/RecipeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/RecipeController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/bundles.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/bundles.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/packages/lexik_jwt_authentication.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/lexik_jwt_authentication.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/packages/security.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/security.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/routes.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/routes.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/services.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/services.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -112,6 +116,9 @@
       <path value="$PROJECT_DIR$/vendor/symfony/security-csrf" />
       <path value="$PROJECT_DIR$/vendor/symfony/security-http" />
       <path value="$PROJECT_DIR$/vendor/symfony/apache-pack" />
+      <path value="$PROJECT_DIR$/vendor/symfony/validator" />
+      <path value="$PROJECT_DIR$/vendor/symfony/translation-contracts" />
+      <path value="$PROJECT_DIR$/vendor/gesdinet/jwt-refresh-token-bundle" />
     </include_path>
   </component>
   <component name="ProjectId" id="1hb4CIdP8B1ZbUBgLgvMIqKcoDk" />
@@ -162,7 +169,7 @@
       <workItem from="1600873232546" duration="4373000" />
       <workItem from="1600966099741" duration="824000" />
       <workItem from="1601481374158" duration="1937000" />
-      <workItem from="1601726611781" duration="5000000" />
+      <workItem from="1601726611781" duration="10194000" />
     </task>
     <servers />
   </component>
@@ -212,10 +219,10 @@
       <screen x="72" y="27" width="1608" height="1023" />
     </state>
     <state x="657" y="453" width="438" height="177" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/72.27.1608.1023/1680.0.1440.900@72.27.1608.1023" timestamp="1600587177047" />
-    <state x="2115" y="189" width="821" height="522" key="find.popup" timestamp="1601731253698">
+    <state x="2115" y="189" width="821" height="522" key="find.popup" timestamp="1601733603089">
       <screen x="1680" y="0" width="1440" height="900" />
     </state>
-    <state x="2115" y="189" width="821" height="522" key="find.popup/72.27.1608.1023/1680.0.1440.900@1680.0.1440.900" timestamp="1601731253698" />
+    <state x="2115" y="189" width="821" height="522" key="find.popup/72.27.1608.1023/1680.0.1440.900@1680.0.1440.900" timestamp="1601733603089" />
     <state x="557" y="268" width="917" height="594" key="find.popup/72.27.1608.1023/1680.0.1440.900@72.27.1608.1023" timestamp="1601729672624" />
     <state x="540" y="244" key="run.anything.popup" timestamp="1600589136753">
       <screen x="72" y="27" width="1608" height="1023" />
