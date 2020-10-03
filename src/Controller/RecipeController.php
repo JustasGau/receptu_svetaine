@@ -48,17 +48,13 @@ class RecipeController extends AbstractController
                 !$request->get('name') ||
                 !$request->get('text'))
             {
-                throw new \Exception();
+                $data = [
+                    'status' => 400,
+                    'errors' => "Incorrect data",
+                ];
+                return $this->response($data, 400);
             }
 
-//            $user = $userRepository->find($request->get('user'));
-//            if (!$user){
-//                $data = [
-//                    'status' => 404,
-//                    'errors' => "User not found",
-//                ];
-//                return $this->response($data, 404);
-//            }
             if($this->getUser()->getBanned() == true) {
                 $data = [
                     'status' => 403,
@@ -74,10 +70,10 @@ class RecipeController extends AbstractController
             $entityManager->flush();
 
             $data = [
-                'status' => 200,
+                'status' => 201,
                 'success' => "Recipe added successfully",
             ];
-            return $this->response($data);
+            return $this->response($data,201);
 
         }catch (\Exception $e){
             dd($e);
@@ -153,7 +149,7 @@ class RecipeController extends AbstractController
      * @param RecipeRepository $recipeRepository
      * @param $id
      * @return JsonResponse
-     * @Route("/recipes/{id}", name="recipes_put", methods={"PUT"})
+     * @Route("/recipes/{id}", name="recipes_put", methods={"PATCH"})
      */
     public function updateRecipe(Request $request, EntityManagerInterface $entityManager, UserRepository $userRepository,
                                  RecipeRepository $recipeRepository, $id){
@@ -179,7 +175,7 @@ class RecipeController extends AbstractController
 
             $data = [
                 'status' => 200,
-                'errors' => "Recipe updated successfully",
+                'success' => "Recipe updated successfully",
             ];
             return $this->response($data);
 
@@ -215,7 +211,7 @@ class RecipeController extends AbstractController
         $entityManager->flush();
         $data = [
             'status' => 200,
-            'errors' => "Recipe deleted successfully",
+            'success' => "Recipe deleted successfully",
         ];
         return $this->response($data);
     }

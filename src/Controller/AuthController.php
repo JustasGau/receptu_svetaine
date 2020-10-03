@@ -40,7 +40,7 @@ class AuthController extends ApiController
         $user->setUsername($username);
         $em->persist($user);
         $em->flush();
-        return $this->respondWithSuccess(sprintf('User %s successfully created', $user->getUsername()));
+        return $this->respondCreated(sprintf('User %s successfully created', $user->getUsername()));
     }
 
 

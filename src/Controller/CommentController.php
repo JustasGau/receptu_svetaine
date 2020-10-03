@@ -45,7 +45,11 @@ class CommentController extends AbstractController
                 !$request->get('text') ||
                 !$request->get('recipe'))
             {
-                throw new \Exception();
+                $data = [
+                    'status' => 400,
+                    'errors' => "Incorrect data",
+                ];
+                return $this->response($data, 400);
             }
 
             $recipe = $recipeRepository->find($request->get('recipe'));
@@ -66,10 +70,10 @@ class CommentController extends AbstractController
             $entityManager->flush();
 
             $data = [
-                'status' => 200,
+                'status' => 201,
                 'success' => "Comment added successfully",
             ];
-            return $this->response($data);
+            return $this->response($data, 201);
 
         }catch (\Exception $e){
             $data = [
@@ -105,7 +109,7 @@ class CommentController extends AbstractController
      * @param CommentRepository $commentRepository
      * @param $id
      * @return JsonResponse
-     * @Route("/comments/{id}", name="comments_put", methods={"PUT"})
+     * @Route("/comments/{id}", name="comments_put", methods={"PATCH"})
      */
     public function updateComments(Request $request, EntityManagerInterface $entityManager, CommentRepository $commentRepository, $id){
 
@@ -132,7 +136,7 @@ class CommentController extends AbstractController
 
             $data = [
                 'status' => 200,
-                'errors' => "Comment updated successfully",
+                'success' => "Comment updated successfully",
             ];
             return $this->response($data);
 
@@ -168,7 +172,7 @@ class CommentController extends AbstractController
         $entityManager->flush();
         $data = [
             'status' => 200,
-            'errors' => "Comment deleted successfully",
+            'success' => "Comment deleted successfully",
         ];
         return $this->response($data);
     }

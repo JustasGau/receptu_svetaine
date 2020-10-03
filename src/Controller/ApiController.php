@@ -69,7 +69,6 @@ class ApiController extends AbstractController
         return new JsonResponse($data, $this->getStatusCode(), $headers);
     }
 
-
     /**
      * Sets an error message and returns a JSON response
      *
@@ -87,18 +86,6 @@ class ApiController extends AbstractController
         return new JsonResponse($data, $this->getStatusCode(), $headers);
     }
 
-
-    /**
-     * Returns a 401 Unauthorized http response
-     *
-     * @param string $message
-     *
-     * @return JsonResponse
-     */
-    public function respondUnauthorized($message = 'Not authorized!')
-    {
-        return $this->setStatusCode(401)->respondWithErrors($message);
-    }
 
     /**
      * Returns a 403 Forbidden http response

@@ -45,7 +45,11 @@ class IngredientsController extends AbstractController
                 !$request->get('recipe')||
                 !$request->get('amount'))
             {
-                throw new \Exception();
+                $data = [
+                    'status' => 400,
+                    'errors' => "Incorrect data",
+                ];
+                return $this->response($data, 400);
             }
             $recipe = $recipeRepository->find($request->get('recipe'));
             if (!$recipe){
@@ -68,10 +72,10 @@ class IngredientsController extends AbstractController
             $entityManager->flush();
 
             $data = [
-                'status' => 200,
+                'status' => 201,
                 'success' => "Ingredient added successfully",
             ];
-            return $this->response($data);
+            return $this->response($data, 201);
 
         }catch (\Exception $e){
             dd($e);
@@ -109,7 +113,7 @@ class IngredientsController extends AbstractController
      * @param IngredientsRepository $ingredientsRepository
      * @param $id
      * @return JsonResponse
-     * @Route("/ingredients/{id}", name="ingredients_put", methods={"PUT"})
+     * @Route("/ingredients/{id}", name="ingredients_put", methods={"PATCH"})
      */
     public function updateIngredients(Request $request, EntityManagerInterface $entityManager, IngredientsRepository $ingredientsRepository, $id){
 
@@ -138,7 +142,7 @@ class IngredientsController extends AbstractController
 
             $data = [
                 'status' => 200,
-                'errors' => "Ingredient updated successfully",
+                'success' => "Ingredient updated successfully",
             ];
             return $this->response($data);
 
@@ -175,7 +179,7 @@ class IngredientsController extends AbstractController
         $entityManager->flush();
         $data = [
             'status' => 200,
-            'errors' => "Ingredient deleted successfully",
+            'success' => "Ingredient deleted successfully",
         ];
         return $this->response($data);
     }
