@@ -1,5 +1,8 @@
 # Receptų svetainė
 Saitynas. Justas Gaurylius
+
+yarn encore dev-server --hot
+
 ## API dokumentacija
 
 Yra **trys** dalykinės srities kategorijos ir vartotojai. API yra pasiekiama per puslapį: *https://arcane-spire-27910.herokuapp.com/api/*
