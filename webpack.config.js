@@ -1,9 +1,10 @@
 var Encore = require('@symfony/webpack-encore');
+// const { VueLoaderPlugin } = require('vue-loader');
 
 // Manually configure the runtime environment if not already configured yet by the "encore" command.
 // It's useful when you use tools that rely on webpack.config.js file.
 if (!Encore.isRuntimeEnvironmentConfigured()) {
-    Encore.configureRuntimeEnvironment(process.env.NODE_ENV || 'dev');
+    Encore.configureRuntimeEnvironment(process.env.NODE_ENV || 'prod');
 }
 
 Encore
@@ -12,6 +13,7 @@ Encore
     // public path used by the web server to access the output path
     .setPublicPath('/build')
     .enableVueLoader()
+    .cleanupOutputBeforeBuild()
     // only needed for CDN's or sub-directory deploy
     //.setManifestKeyPrefix('build/')
 
@@ -34,6 +36,11 @@ Encore
     // will require an extra script tag for runtime.js
     // but, you probably want this, unless you're building a single-page app
     .enableSingleRuntimeChunk()
+    // .addLoader({
+    //     test: /\.vue$/,
+    //     loader: 'vue-loader'
+    // })
+    // .addPlugin(new VueLoaderPlugin())
 
     /*
      * FEATURE CONFIG

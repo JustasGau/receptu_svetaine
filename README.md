@@ -2,6 +2,7 @@
 Saitynas. Justas Gaurylius
 
 yarn encore dev-server --hot
+symfony serve -d
 
 ## API dokumentacija
 
