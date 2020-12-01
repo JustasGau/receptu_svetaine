@@ -13,10 +13,11 @@
           <b-navbar-nav class="ml-auto">
             <b-nav-item-dropdown right>
               <template #button-content>
-                <em>Vartotojas</em>
+                <em>{{ $store.state.user || 'Vartotojas' }}</em>
               </template>
-              <b-dropdown-item to="#">Receptai</b-dropdown-item>
-              <b-dropdown-item to="#">Atsijungti</b-dropdown-item>
+              <b-dropdown-item to="/">Receptai</b-dropdown-item>
+              <b-dropdown-item v-if="!$store.state.user" to="/login">Prisijungti</b-dropdown-item>
+              <b-dropdown-item v-if="$store.state.user" @click="logout">Atsijungti</b-dropdown-item>
             </b-nav-item-dropdown>
           </b-navbar-nav>
         </b-collapse>
@@ -27,7 +28,7 @@
         :show="dismissCountDown"
         dismissible
         fade
-        variant="danger"
+        :variant="alertType"
         @dismiss-count-down="countDownChanged"
     >
       {{ errorText }}
@@ -44,35 +45,34 @@ export default {
     return {
       dismissSecs: 5,
       dismissCountDown: 0,
-      authenticated: false,
-      errorText: ''
+      errorText: '',
+      alertType: 'danger'
     }
   },
   methods: {
     countDownChanged(dismissCountDown) {
       this.dismissCountDown = dismissCountDown
     },
-    showAlert(text) {
+    showAlert(text, type) {
       this.errorText = text
       this.dismissCountDown = this.dismissSecs
+      this.alertType = type
+    },
+    logout () {
+      this.$store.commit('setToken', '')
+      this.$store.commit('setUser', '')
+      this.showAlert('Sėkmingai atsijungta', 'success')
     }
   },
   created () {
-    this.authenticated = this.$store.state.validated
+
   },
   mounted () {
-    this.authenticated = true //TODO remove line
-    if(!this.authenticated) {
-      this.$router.push('login')
-    }
   }
 }
 
 /*
 TODO
-1 grazus login
-2 neforsuot login guestams
-2logout
 3auto token refresh
 
 6admin view to edit users
@@ -86,6 +86,7 @@ TODO
 15Comment user picture?
 komentaru pagination
 komentuoja tik prisiregistrave
+cookies del tokeno
 */
 </script>
 

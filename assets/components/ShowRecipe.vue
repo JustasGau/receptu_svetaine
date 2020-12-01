@@ -35,7 +35,7 @@
           </b-col>
         </b-row>
       </b-container>
-      <b-form @submit.stop.prevent="onSubmit">
+      <b-form v-if="$store.state.user" @submit.stop.prevent="onSubmit">
         <b-form-group id="input-group-1" label-for="input-2">
           <b-form-input
               id="input-2"

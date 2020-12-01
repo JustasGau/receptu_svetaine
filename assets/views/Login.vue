@@ -1,7 +1,7 @@
 
 <template>
   <div>
-    <b-form @submit="onSubmit">
+    <b-form id="login-form" @submit.stop.prevent="onSubmit">
       <b-form-group
           id="input-group-1"
           label="Username:"
@@ -52,10 +52,13 @@ export default {
           .then((response) => {
             return response.json()
           }).then((data) => {
+            console.log(data)
             if (data.token){
-                this.$store.commit('validate')
-                this.$store.commit('setToken', data.token)
-                this.$router.push('/')
+              this.$store.commit('setToken', data.token)
+              this.$store.commit('setRefreshToken', data.refresh_token)
+              this.$store.commit('setUser', this.form.username)
+              this.$router.push('/')
+              this.$emit('show-error', 'Sėkmingai prisijungta', 'success')
               }
           }
       )
@@ -63,3 +66,10 @@ export default {
   }
 }
 </script>
+
+<style>
+  #login-form {
+    width: 50%;
+    margin: 40px auto;
+  }
+</style>

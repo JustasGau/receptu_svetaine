@@ -37,24 +37,9 @@
       }
     },
     created () {
-      const token = this.$store.state.token
-      const requestOptions = {
-        method: "GET",
-        headers: {'Content-Type': 'application/json',
-                  'Authorization': 'Bearer ' + token},
-        body: JSON.stringify(this.form)
-      };
-      fetch(this.$store.state.address + "recipes", requestOptions)
-          .then((response) => {
-            return response.json()
-          }).then((data) => {
-            if (!data.code) {
-              this.recipes = data
-            } else {
-              this.$emit('show-error', data.message)
-            }
-          }
-      )
+      this.$fetcher('recipes', 'GET').then((data) => {
+        this.recipes = data
+      })
     }
   }
 </script>

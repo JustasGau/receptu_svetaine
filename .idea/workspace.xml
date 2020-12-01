@@ -20,17 +20,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="94d31ea5-7d0d-4ae0-b8cf-037b0d4068e6" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/assets/views/Recipes.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/components/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/assets/components/App.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/router/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/styles/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/styles/app.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/views/Home.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/components/ShowRecipe.vue" beforeDir="false" afterPath="$PROJECT_DIR$/assets/components/ShowRecipe.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/plugins/fetcher.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/plugins/fetcher.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/views/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/assets/views/Login.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/packages/lexik_jwt_authentication.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/lexik_jwt_authentication.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/views/Recipes.vue" beforeDir="false" afterPath="$PROJECT_DIR$/assets/views/Recipes.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/packages/security.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/security.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -199,7 +196,7 @@
       <workItem from="1602322865800" duration="6294000" />
       <workItem from="1605874731181" duration="96000" />
       <workItem from="1605874837646" duration="11102000" />
-      <workItem from="1606800933861" duration="20309000" />
+      <workItem from="1606800933861" duration="25866000" />
     </task>
     <servers />
   </component>
@@ -253,19 +250,19 @@
       <screen x="72" y="27" width="1608" height="1023" />
     </state>
     <state x="657" y="453" width="438" height="177" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/72.27.1608.1023/1680.0.1440.900@72.27.1608.1023" timestamp="1600587177047" />
-    <state x="2115" y="189" width="821" height="548" key="find.popup" timestamp="1606825627860">
+    <state x="2115" y="189" width="821" height="548" key="find.popup" timestamp="1606833043519">
       <screen x="1680" y="0" width="1440" height="900" />
     </state>
-    <state x="2115" y="189" width="821" height="548" key="find.popup/72.27.1608.1023/1680.0.1440.900@1680.0.1440.900" timestamp="1606825627860" />
+    <state x="2115" y="189" width="821" height="548" key="find.popup/72.27.1608.1023/1680.0.1440.900@1680.0.1440.900" timestamp="1606833043519" />
     <state x="557" y="268" width="917" height="594" key="find.popup/72.27.1608.1023/1680.0.1440.900@72.27.1608.1023" timestamp="1602329427177" />
     <state x="540" y="244" key="run.anything.popup" timestamp="1600589136753">
       <screen x="72" y="27" width="1608" height="1023" />
     </state>
     <state x="540" y="244" key="run.anything.popup/72.27.1608.1023/1680.0.1440.900@72.27.1608.1023" timestamp="1600589136753" />
-    <state x="2098" y="197" width="672" height="597" key="search.everywhere.popup" timestamp="1606827299607">
+    <state x="2098" y="197" width="672" height="597" key="search.everywhere.popup" timestamp="1606833024996">
       <screen x="1680" y="0" width="1440" height="900" />
     </state>
-    <state x="2098" y="197" width="672" height="597" key="search.everywhere.popup/72.27.1608.1023/1680.0.1440.900@1680.0.1440.900" timestamp="1606827299607" />
+    <state x="2098" y="197" width="672" height="597" key="search.everywhere.popup/72.27.1608.1023/1680.0.1440.900@1680.0.1440.900" timestamp="1606833024996" />
     <state x="539" y="251" width="672" height="678" key="search.everywhere.popup/72.27.1608.1023/1680.0.1440.900@72.27.1608.1023" timestamp="1605875646452" />
   </component>
 </project>
