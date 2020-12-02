@@ -23,15 +23,10 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/components/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/assets/components/App.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/components/CommentRecipe.vue" beforeDir="false" afterPath="$PROJECT_DIR$/assets/components/CommentRecipe.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/components/RecipeCard.vue" beforeDir="false" afterPath="$PROJECT_DIR$/assets/components/RecipeCard.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/components/EditRecipe.vue" beforeDir="false" afterPath="$PROJECT_DIR$/assets/components/EditRecipe.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/components/ShowRecipe.vue" beforeDir="false" afterPath="$PROJECT_DIR$/assets/components/ShowRecipe.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/router/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/views/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/assets/views/Login.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/views/Recipes.vue" beforeDir="false" afterPath="$PROJECT_DIR$/assets/views/Recipes.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/RecipeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/RecipeController.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -146,7 +141,7 @@
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/images" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/assets/components" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -166,6 +161,7 @@
       <recent name="$PROJECT_DIR$/assets/js" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/assets/components" />
       <recent name="$PROJECT_DIR$/public/images" />
       <recent name="$PROJECT_DIR$/assets" />
     </key>
@@ -202,7 +198,7 @@
       <workItem from="1605874731181" duration="96000" />
       <workItem from="1605874837646" duration="11102000" />
       <workItem from="1606800933861" duration="25922000" />
-      <workItem from="1606894135965" duration="12548000" />
+      <workItem from="1606894135965" duration="20605000" />
     </task>
     <servers />
   </component>
@@ -256,10 +252,10 @@
       <screen x="72" y="27" width="1608" height="1023" />
     </state>
     <state x="657" y="453" width="438" height="177" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/72.27.1608.1023/1680.0.1440.900@72.27.1608.1023" timestamp="1600587177047" />
-    <state x="2115" y="189" width="821" height="548" key="find.popup" timestamp="1606907730735">
+    <state x="2115" y="189" width="821" height="548" key="find.popup" timestamp="1606916037891">
       <screen x="1680" y="0" width="1440" height="900" />
     </state>
-    <state x="2115" y="189" width="821" height="548" key="find.popup/72.27.1608.1023/1680.0.1440.900@1680.0.1440.900" timestamp="1606907730735" />
+    <state x="2115" y="189" width="821" height="548" key="find.popup/72.27.1608.1023/1680.0.1440.900@1680.0.1440.900" timestamp="1606916037891" />
     <state x="557" y="268" width="917" height="594" key="find.popup/72.27.1608.1023/1680.0.1440.900@72.27.1608.1023" timestamp="1602329427177" />
     <state x="540" y="244" key="run.anything.popup" timestamp="1600589136753">
       <screen x="72" y="27" width="1608" height="1023" />

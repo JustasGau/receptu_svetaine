@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-modal v-model="show" size="xl" :title="recipe.name">
+    <b-modal id="show-modal" size="xl" :title="recipe.name">
       <b-img src="https://picsum.photos/1024/400/?image=41" fluid alt="Responsive image"></b-img>
       <b-container style="margin-top: 20px">
         <b-row>
@@ -67,6 +67,7 @@
         comments: [],
         ingredients: [],
         comment: '',
+        counter: 0,
         rows: 0,
         currentPage: 1,
         perPage: 2,
@@ -125,21 +126,26 @@
       }
     },
     watch: {
-      id () {
-        this.recipe = []
-        this.comments = []
-        this.ingredients = []
-        this.$fetcher("recipes/" + this.id, 'GET').then((data) => {
-          this.recipe = data
-        })
-        this.$fetcher("recipes/" + this.id + '/comments', 'GET').then((data) => {
-          this.comments = data
-          this.rows = data.length
-        })
-        this.$fetcher("recipes/" + this.id + '/ingredients', 'GET').then((data) => {
-          this.ingredients = data
-          this.isBusy = false
-        })
+      show () {
+        this.counter++
+        if (this.counter == 2) {
+          this.counter = 0
+          this.recipe = []
+          this.comments = []
+          this.ingredients = []
+          this.$fetcher("recipes/" + this.id, 'GET').then((data) => {
+            this.recipe = data
+          })
+          this.$fetcher("recipes/" + this.id + '/comments', 'GET').then((data) => {
+            this.comments = data
+            this.rows = data.length
+          })
+          this.$fetcher("recipes/" + this.id + '/ingredients', 'GET').then((data) => {
+            this.ingredients = data
+            this.isBusy = false
+          })
+        }
+        this.$emit("reset-show")
       }
     },
     created() {

@@ -76,12 +76,10 @@ export default {
 
 /*
 TODO
-7Add/edit/remove recipe
-8Add/edit/remove ingredients
 11animation
 14image uploading
 cookies del tokeno
-isversti klaidas
+mobile
 */
 </script>
 

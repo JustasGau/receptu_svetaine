@@ -69,14 +69,16 @@ class RecipeController extends AbstractController
             $entityManager->persist($recipe);
             $entityManager->flush();
 
+            $id = $recipe->getId();
+
             $data = [
                 'status' => 201,
                 'success' => "Recipe added successfully",
+                'id' => $id
             ];
             return $this->response($data,201);
 
         }catch (\Exception $e){
-            dd($e);
             $data = [
                 'status' => 422,
                 'errors' => "Data not valid",

@@ -13,6 +13,7 @@ import fetcher from './plugins/fetcher'
 import RecipeCard from './components/RecipeCard'
 import ShowRecipe from './components/ShowRecipe'
 import EditRecipe from './components/EditRecipe'
+import AddRecipe from './components/AddRecipe'
 import Comment from './components/CommentRecipe'
 
 Vue.use(BootstrapVue)
@@ -23,6 +24,7 @@ Vue.component('recipe-card', RecipeCard)
 Vue.component('show-recipe', ShowRecipe)
 Vue.component('comment-recipe', Comment)
 Vue.component('edit-recipe', EditRecipe)
+Vue.component('add-recipe', AddRecipe)
 
 const router = new VueRouter({
     routes

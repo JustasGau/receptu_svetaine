@@ -4,7 +4,7 @@
       <div>
         <h1>Receptai</h1>
       </div>
-      <b-button v-if="filter" @click="addRecipe" variant="primary">Pridėti receptą</b-button>
+      <b-button id="add-button" v-if="filter" v-b-modal.add-modal variant="primary">Pridėti receptą</b-button>
       <b-card-group deck>
         <recipe-card
             v-for="recipe in filteredRecipes"
@@ -18,8 +18,9 @@
         />
 
       </b-card-group>
-      <show-recipe :show="this.show" :id="id"></show-recipe>
-      <edit-recipe :show="this.edit" :id="id"></edit-recipe>
+      <show-recipe @reset-show="show=false" :show="show" :id="id"></show-recipe>
+      <edit-recipe @show-error="showAlert" @reset-edit="edit=false" :show="edit" :id="id"></edit-recipe>
+      <b-modal size="xl" id="add-modal" :hide-footer="true"><add-recipe @refresh-recipes="refreshRecipes"></add-recipe></b-modal>
     </div>
   </div>
 </template>
@@ -42,18 +43,25 @@
       }
     },
     methods: {
-      addRecipe (){
-
+      refreshRecipes (){
+        this.$fetcher('recipes', 'GET').then((data) => {
+          this.recipes = data
+        })
       },
       showModal (id) {
         this.show = true
         this.edit = false
+        this.$bvModal.show('show-modal')
         this.id = String(id)
       },
       editModal (id) {
-        this.edit = true
         this.show = false
+        this.edit = true
+        this.$bvModal.show('edit-modal')
         this.id = String(id)
+      },
+      showAlert (text, type) {
+        this.$emit('show-error', text, type)
       },
       deleteRecipe (id) {
         let index
@@ -80,13 +88,13 @@
       }
     },
     created () {
-      this.$fetcher('recipes', 'GET').then((data) => {
-        this.recipes = data
-      })
+      this.refreshRecipes()
     }
   }
 </script>
 
 <style scoped>
-
+ #add-button {
+   margin-bottom: 20px;
+ }
 </style>
