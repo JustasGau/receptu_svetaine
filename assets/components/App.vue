@@ -8,16 +8,17 @@
         <b-collapse id="nav-collapse" is-nav>
           <b-navbar-nav>
             <b-nav-item to="/about">Apie</b-nav-item>
-            <b-nav-item to="/about">Vartotojai</b-nav-item>
+            <b-nav-item v-if="$store.state.isAdmin" to="/users">Vartotojai</b-nav-item>
           </b-navbar-nav>
           <b-navbar-nav class="ml-auto">
             <b-nav-item-dropdown right>
               <template #button-content>
                 <em>{{ $store.state.user || 'Vartotojas' }}</em>
               </template>
-              <b-dropdown-item to="/">Receptai</b-dropdown-item>
+              <b-dropdown-item to="/user/recipes">Receptai</b-dropdown-item>
               <b-dropdown-item v-if="!$store.state.user" to="/login">Prisijungti</b-dropdown-item>
               <b-dropdown-item v-if="$store.state.user" @click="logout">Atsijungti</b-dropdown-item>
+              <b-dropdown-item to="/register">Prisiregistruoti</b-dropdown-item>
             </b-nav-item-dropdown>
           </b-navbar-nav>
         </b-collapse>
@@ -61,6 +62,8 @@ export default {
     logout () {
       this.$store.commit('setToken', '')
       this.$store.commit('setUser', '')
+      this.$store.commit('setAdmin', false)
+      this.$router.push('/')
       this.showAlert('Sėkmingai atsijungta', 'success')
     }
   },
@@ -73,20 +76,12 @@ export default {
 
 /*
 TODO
-3auto token refresh
-
-6admin view to edit users
 7Add/edit/remove recipe
 8Add/edit/remove ingredients
-9add/edit/remove comments
 11animation
-12admin differentiation
-13user editing
 14image uploading
-15Comment user picture?
-komentaru pagination
-komentuoja tik prisiregistrave
 cookies del tokeno
+isversti klaidas
 */
 </script>
 

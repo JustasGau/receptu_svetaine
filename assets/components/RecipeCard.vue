@@ -9,20 +9,30 @@
         style="max-width: 20rem;"
         class="mb-2"
     >
-      <b-button href="#" @click="showRecipe" variant="primary">Peržiūrėti</b-button>
-      <b-button v-if="edit" href="#" variant="warning">Redaguoti</b-button>
-      <b-button v-if="remove" href="#" variant="danger">Trinti</b-button>
+      <b-button
+          @click="$emit('open-show', $vnode.key)"
+          variant="primary">
+        Peržiūrėti
+      </b-button>
+      <b-button
+          v-if="edit"
+          @click="$emit('open-edit', $vnode.key)"
+          variant="warning">
+        Redaguoti
+      </b-button>
+      <b-button v-if="edit" @click="deleteRecipe" variant="danger">Trinti</b-button>
     </b-card>
   </div>
 </template>
 
 <script>
   export default {
-    props: ['name', 'image', 'edit', 'remove'],
+    props: ['name', 'image', 'edit'],
     methods : {
-      showRecipe () {
-        this.$emit('open-modal', true, false, this.$vnode.key)
-        console.log(this.$vnode.key)
+      deleteRecipe () {
+        this.$fetcher('recipes/' + this.$vnode.key, 'DELETE').then(()=>{
+          this.$emit('delete-recipe', this.$vnode.key)
+        })
       }
     }
   }

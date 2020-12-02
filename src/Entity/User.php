@@ -235,7 +235,9 @@ class User implements UserInterface, \JsonSerializable
     {
         return [
             "id" => $this->getId(),
-            "name" => $this->getUsername()
+            "name" => $this->getUsername(),
+            "email" => $this->getEmail(),
+            "status" => $this->getBanned()
         ];
     }
 }

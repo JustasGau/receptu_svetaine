@@ -2,7 +2,7 @@
   <div>
     <b-modal v-model="show" size="xl" :title="recipe.name">
       <b-img src="https://picsum.photos/1024/400/?image=41" fluid alt="Responsive image"></b-img>
-      <b-container>
+      <b-container style="margin-top: 20px">
         <b-row>
           <b-col>
             <b-table :items="ingredients" :fields="inFields"
@@ -25,13 +25,20 @@
         <b-row>
           <b-col>
             <h3> Komentarai</h3>
-            <comment-recipe v-for="com in comments"
+            <comment-recipe v-for="com in pageComments"
                             :key="com.id"
                             :text="com.text"
                             :user="com.user.name"
                             :date="com.date.date"
+                            @delete-comment="deleteCommentLocal"
+                            @update-comment="updateComment"
             />
-
+            <b-pagination
+                v-model="currentPage"
+                :total-rows="rows"
+                :per-page="perPage"
+                aria-controls="my-table"
+            ></b-pagination>
           </b-col>
         </b-row>
       </b-container>
@@ -56,10 +63,13 @@
   export default {
     data () {
       return {
-        recipe: {},
-        comments: {},
-        ingredients: {},
+        recipe: [],
+        comments: [],
+        ingredients: [],
         comment: '',
+        rows: 0,
+        currentPage: 1,
+        perPage: 2,
         sendingComment: false,
         inFields: [
           {
@@ -94,27 +104,51 @@
             this.sendingComment = false
           })
         })
+      },
+      deleteCommentLocal (id) {
+        let index;
+        for (let i = 0; i < this.comments.length ; i++){
+          if (String(this.comments[i].id) == id) {
+            index = i
+            break
+          }
+        }
+        this.comments.splice(index, 1)
+      },
+      updateComment (id, newText) {
+        for (let i = 0; i < this.comments.length ; i++){
+          if (String(this.comments[i].id) == id) {
+            this.comments[i].text = newText
+            break
+          }
+        }
       }
     },
     watch: {
       id () {
-        this.recipe = {}
-        this.comments = {}
-        this.ingredients = {}
+        this.recipe = []
+        this.comments = []
+        this.ingredients = []
         this.$fetcher("recipes/" + this.id, 'GET').then((data) => {
           this.recipe = data
-          this.$fetcher("recipes/" + this.id + '/comments', 'GET').then((data) => {
-            this.comments = data
-          })
-          this.$fetcher("recipes/" + this.id + '/ingredients', 'GET').then((data) => {
-            this.ingredients = data
-            this.isBusy = false
-          })
+        })
+        this.$fetcher("recipes/" + this.id + '/comments', 'GET').then((data) => {
+          this.comments = data
+          this.rows = data.length
+        })
+        this.$fetcher("recipes/" + this.id + '/ingredients', 'GET').then((data) => {
+          this.ingredients = data
+          this.isBusy = false
         })
       }
     },
     created() {
 
+    },
+    computed : {
+      pageComments(){
+        return this.comments.slice((this.currentPage - 1) * this.perPage, this.currentPage * this.perPage)
+      }
     },
     props: ['id', 'show']
   }

@@ -31,6 +31,9 @@
 </template>
 
 <script>
+
+import VueJwtDecode from 'vue-jwt-decode'
+
 export default {
   data () {
     return {
@@ -54,9 +57,13 @@ export default {
           }).then((data) => {
             console.log(data)
             if (data.token){
+              const decoded_token = VueJwtDecode.decode(data.token)
               this.$store.commit('setToken', data.token)
               this.$store.commit('setRefreshToken', data.refresh_token)
-              this.$store.commit('setUser', this.form.username)
+              this.$store.commit('setUser', decoded_token.username)
+              if (decoded_token.roles[0] === "ROLE_ADMIN") {
+                this.$store.commit('setAdmin', true)
+              }
               this.$router.push('/')
               this.$emit('show-error', 'Sėkmingai prisijungta', 'success')
               }
