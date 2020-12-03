@@ -33,6 +33,7 @@
 <script>
 
 import VueJwtDecode from 'vue-jwt-decode'
+import Vue from "vue";
 
 export default {
   data () {

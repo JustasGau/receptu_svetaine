@@ -1,17 +1,24 @@
+import VueJwtDecode from "vue-jwt-decode";
+
 function refreshToken() {
     return new Promise((resolve, reject) => {
-        const requestForm = { refresh_token: this.$store.state.refreshToken }
+        const requestForm = { refresh_token: this.$cookies.get("refresh_token") }
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(requestForm)
         };
-        fetch(this.$store.state.address + '/token/refresh', requestOptions)
+        fetch(this.$store.state.address + 'token/refresh', requestOptions)
             .then((response) => {
                 return response.json()
             }).then((data) => {
+                const decoded_token = VueJwtDecode.decode(data.token)
                 this.$store.commit('setToken', data.token)
                 this.$store.commit('setRefreshToken', data.refresh_token)
+                this.$store.commit('setUser', decoded_token.username)
+                if (decoded_token.roles[0] === "ROLE_ADMIN") {
+                    this.$store.commit('setAdmin', true)
+                }
                 resolve(data)
             }
         )
@@ -60,6 +67,7 @@ function workRequest (page, type, form, isImage) {
 }
 export default {
     install (Vue) {
-        Vue.prototype.$fetcher = workRequest
+        Vue.prototype.$fetcher = workRequest,
+        Vue.prototype.$refresh = refreshToken
     }
 }

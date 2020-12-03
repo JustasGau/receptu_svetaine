@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-modal id="show-modal" size="xl" :title="recipe.name">
+    <b-modal id="show-modal" size="xl" :title="recipe.name" :hide-footer="true">
       <b-img v-if="recipe.image" :src="recipe.image" fluid alt="Responsive image"></b-img>
       <b-container style="margin-top: 20px">
         <b-row>
@@ -20,7 +20,7 @@
             </b-table>
 
           </b-col>
-          <b-col>{{ recipe.text }}</b-col>
+          <b-col style="white-space: break-spaces;">{{recipe.text}}</b-col>
         </b-row>
         <b-row>
           <b-col>
@@ -40,6 +40,7 @@
                 :per-page="perPage"
                 aria-controls="my-table"
             ></b-pagination>
+            <div v-if="comments.length === 0">Komentarų nėra</div>
           </b-col>
         </b-row>
       </b-container>
@@ -76,10 +77,7 @@
         inFields: [
           {
             key: 'amount',
-            label: 'Kiekis',
-            formatter: value => {
-              return value + ' g'
-            }
+            label: 'Kiekis'
           },
           {
             key: 'name',
@@ -87,7 +85,11 @@
           },
           {
             key: 'calories',
-            label: 'Kalorijos'
+            label: 'Kalorijos',
+            formatter: value => {
+              if (!value) return 0
+              else return value
+            }
           }
         ],
         isBusy: true

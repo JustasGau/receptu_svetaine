@@ -16,4 +16,4 @@ framework:
     php_errors:
         log: true
 
-#    error_controller: App\Controller\ErrorController::show //TODO
+    error_controller: App\Controller\ErrorController::show

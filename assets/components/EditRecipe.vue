@@ -9,7 +9,7 @@
           drop-placeholder="Įmesti failą čia..."
           browse-text="Failai"
       ></b-form-file>
-      <b-img v-if="recipe.image" :src="recipe.image" fluid alt="Responsive image"></b-img>
+      <b-img v-if="recipe.image" :src="recipe.image" fluid></b-img>
       <b-container style="margin-top: 20px">
         <b-row>
           <b-col>
@@ -28,6 +28,9 @@
               <template #cell(calories)="row">
                 <b-form-input type="number" v-model="row.item.calories"> </b-form-input>
               </template>
+              <template #cell(delete)="row">
+                <b-button @click="deleteIngredient(row.item.id)" variant="danger">-</b-button>
+              </template>
               <template #table-busy>
                 <div class="text-center text-danger my-2">
                   <b-spinner class="align-middle"></b-spinner>
@@ -38,7 +41,7 @@
             <b-button @click="ingredients.push({})" variant="primary">+</b-button>
           </b-col>
           <b-col>
-            <b-form-textarea rows="3" v-model="recipe.text" required> </b-form-textarea>
+            <b-form-textarea rows="10" v-model="recipe.text" required> </b-form-textarea>
           </b-col>
         </b-row>
       </b-container>
@@ -54,15 +57,13 @@ export default {
       recipe: {},
       ingredients: [],
       comment: '',
+      removedIng: [],
       file: null,
       counter: 0,
       inFields: [
         {
           key: 'amount',
-          label: 'Kiekis',
-          formatter: value => {
-            return value + ' g'
-          }
+          label: 'Kiekis'
         },
         {
           key: 'name',
@@ -71,16 +72,41 @@ export default {
         {
           key: 'calories',
           label: 'Kalorijos'
+        },
+        {
+          key: 'delete',
+          label: ''
         }
       ],
       isBusy: true
     }
   },
   methods: {
-    post () {
+    deleteIngredient(id) {
+      let index;
+      for (let i = 0; i < this.ingredients.length ; i++){
+        if (String(this.ingredients[i].id) == id) {
+          index = i
+          break
+        }
+      }
+      this.removedIng.push(this.ingredients[index].id)
+      this.ingredients.splice(index, 1)
+    },
+    post (link) {
       const form = {
         name: this.recipe.name,
         text: this.recipe.text
+      }
+      if (link) {
+        form.image = link
+      }
+      if (this.removedIng.length > 0) {
+        for (let i = 0; i < this.removedIng.length; i++) {
+          console.log(this.removedIng)
+          console.log(this.removedIng[i])
+          this.$fetcher('ingredients/' + this.removedIng[i], 'DELETE')
+        }
       }
       this.$fetcher('recipes/' + this.recipe.id, 'PATCH', form).then(() => {
         for (let i = 0; i < this.ingredients.length; i++) {
@@ -103,6 +129,7 @@ export default {
           }
         }
         this.$emit('show-error', 'Sėkmingai atnaujintas receptas', 'success')
+        this.$emit('refresh-recipes')
         this.$bvModal.hide("edit-modal")
       })
     },
@@ -112,7 +139,7 @@ export default {
         this.$fetcher('recipes', 'POST', this.file, true).then((data) => {
           if (data.status === 201) {
             pictureLink = data.link
-            this.post()
+            this.post(pictureLink)
           }
         })
       } else {
@@ -132,7 +159,13 @@ export default {
           this.recipe = data
         })
         this.$fetcher("recipes/" + this.id + '/ingredients', 'GET').then((data) => {
-          this.ingredients = data
+          this.ingredients = data.map(item => {
+            if (!item.calories) {
+              item.calories = 0
+            }
+            return item
+          })
+
           this.isBusy = false
         })
       }

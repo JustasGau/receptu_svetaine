@@ -3,6 +3,7 @@
     <b-form-input id="name" v-model="recipe.name" placeholder="Pavadinimas" required/>
     <b-form-file
         v-model="file"
+        required
         :state="Boolean(file)"
         placeholder="Pasirinkti failą čia..."
         drop-placeholder="Įmesti failą čia..."

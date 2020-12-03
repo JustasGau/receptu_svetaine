@@ -1,13 +1,18 @@
 <template>
-  <h1>About Page</h1>
+  <div>
+    <h1>Apie</h1>
+    <p>
+      Revoliucionarūs receptai
+      <br>
+      Naujausios Vue.js ir Symfony technologijos
+      <br>
+      Čia rasit visko
+      <br>
+    </p>
+  </div>
 </template>
 
 <script>
-export default {
-name: "About"
-}
+  export default {
+  }
 </script>
-
-<style scoped>
-
-</style>
