@@ -2,7 +2,14 @@
   <div>
     <b-modal id="edit-modal" size="xl" :hide-footer="true">
       <b-form-input id="name" v-model="recipe.name" placeholder="Pavadinimas" required/>
-      <b-img src="https://picsum.photos/1024/400/?image=41" fluid alt="Responsive image"></b-img>
+      <b-form-file
+          v-model="file"
+          :state="Boolean(file)"
+          placeholder="Pasirinkti failą čia..."
+          drop-placeholder="Įmesti failą čia..."
+          browse-text="Failai"
+      ></b-form-file>
+      <b-img v-if="recipe.image" :src="recipe.image" fluid alt="Responsive image"></b-img>
       <b-container style="margin-top: 20px">
         <b-row>
           <b-col>
@@ -47,6 +54,7 @@ export default {
       recipe: {},
       ingredients: [],
       comment: '',
+      file: null,
       counter: 0,
       inFields: [
         {
@@ -69,7 +77,7 @@ export default {
     }
   },
   methods: {
-    onSubmit () {
+    post () {
       const form = {
         name: this.recipe.name,
         text: this.recipe.text
@@ -97,6 +105,19 @@ export default {
         this.$emit('show-error', 'Sėkmingai atnaujintas receptas', 'success')
         this.$bvModal.hide("edit-modal")
       })
+    },
+    onSubmit () {
+      if (this.file !== null) {
+        let pictureLink = ''
+        this.$fetcher('recipes', 'POST', this.file, true).then((data) => {
+          if (data.status === 201) {
+            pictureLink = data.link
+            this.post()
+          }
+        })
+      } else {
+        this.post()
+      }
     }
   },
   watch: {

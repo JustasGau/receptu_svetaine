@@ -10,13 +10,12 @@
             v-for="recipe in filteredRecipes"
             :key="recipe.id"
             :name="recipe.name"
-            :picture="recipe.image"
+            :image="recipe.image"
             :edit="filter"
             @open-show="showModal"
             @open-edit="editModal"
             @delete-recipe="deleteRecipe"
         />
-
       </b-card-group>
       <show-recipe @reset-show="show=false" :show="show" :id="id"></show-recipe>
       <edit-recipe @show-error="showAlert" @reset-edit="edit=false" :show="edit" :id="id"></edit-recipe>

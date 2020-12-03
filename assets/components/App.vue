@@ -77,7 +77,7 @@ export default {
 /*
 TODO
 11animation
-14image uploading
+ingridientu trynimas
 cookies del tokeno
 mobile
 */

@@ -1,7 +1,14 @@
 <template>
   <div>
     <b-form-input id="name" v-model="recipe.name" placeholder="Pavadinimas" required/>
-    <b-img src="https://picsum.photos/1024/400/?image=41" fluid alt="Responsive image"></b-img>
+    <b-form-file
+        v-model="file"
+        :state="Boolean(file)"
+        placeholder="Pasirinkti failą čia..."
+        drop-placeholder="Įmesti failą čia..."
+        browse-text="Failai"
+    ></b-form-file>
+    <img style="max-height: 200px;" ref="display"/>
     <b-container style="margin-top: 20px">
       <b-row>
         <b-col>
@@ -36,6 +43,7 @@
 export default {
   data () {
     return {
+      file: null,
       recipe: {
         name: '',
         text: ''
@@ -62,26 +70,42 @@ export default {
       isBusy: true
     }
   },
+  watch: {
+    file () {
+      let scope = this.$refs
+      let fr=new FileReader()
+      fr.onload = function(e) { scope.display.src = this.result; }
+      fr.readAsDataURL(this.file)
+    }
+  },
   methods: {
+
     onSubmit () {
-      const form = {
-        name: this.recipe.name,
-        text: this.recipe.text
-      }
-      this.$fetcher('recipes', 'POST', form).then((data) => {
-        for (let i = 0; i < this.ingredients.length; i++) {
-          let ing = this.ingredients[i]
-            const ingForm = {
-              name: ing.name,
-              recipe: data.id,
-              calories: ing.calories,
-              amount: ing.amount
+      let pictureLink = ''
+      this.$fetcher('recipes', 'POST', this.file, true).then((data) => {
+        if (data.status === 201){
+          pictureLink = data.link
+          const form = {
+            name: this.recipe.name,
+            text: this.recipe.text,
+            image: pictureLink
+          }
+          this.$fetcher('recipes', 'POST', form).then((data) => {
+            for (let i = 0; i < this.ingredients.length; i++) {
+              let ing = this.ingredients[i]
+              const ingForm = {
+                name: ing.name,
+                recipe: data.id,
+                calories: ing.calories,
+                amount: ing.amount
+              }
+              this.$fetcher('ingredients', 'POST', ingForm)
             }
-            this.$fetcher('ingredients', 'POST', ingForm)
+            this.$emit('show-error', 'Sėkmingai sukurtas receptas', 'success')
+            this.$emit('refresh-recipes')
+            this.$bvModal.hide("add-modal")
+          })
         }
-        this.$emit('show-error', 'Sėkmingai sukurtas receptas', 'success')
-        this.$emit('refresh-recipes')
-        this.$bvModal.hide("add-modal")
       })
     }
   },

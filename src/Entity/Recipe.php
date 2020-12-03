@@ -52,6 +52,11 @@ class Recipe implements \JsonSerializable
      */
     private $Comment;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $image;
+
     public function __construct()
     {
         $this->Ingredient = new ArrayCollection();
@@ -188,8 +193,21 @@ class Recipe implements \JsonSerializable
             "name" => $this->getName(),
             "user" => $this->getUser(),
             "date" => $this->getDate(),
-            "text" => $this->getText()
+            "text" => $this->getText(),
+            "image" => $this->getImage()
         ];
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): self
+    {
+        $this->image = $image;
+
+        return $this;
     }
 
 

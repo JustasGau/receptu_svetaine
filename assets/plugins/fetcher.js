@@ -18,18 +18,27 @@ function refreshToken() {
     })
 }
 
-function workRequest (page, type, form) {
+function workRequest (page, type, form, isImage) {
     return new Promise((resolve, reject) => {
         const token = this.$store.state.token
+        const contentType = 'application/json'
         const requestOptions = {
             method: type,
             headers: {
-                'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + token
             },
-        };
-        if (form) {
+        }
+        if (!isImage) {
+            requestOptions.headers["Content-Type"] = contentType
+        }
+        if (form && !isImage) {
             requestOptions.body = JSON.stringify(form)
+            console.log("1")
+        } else if (form && isImage) {
+            let data = new FormData()
+            data.append('image', form)
+            requestOptions.body = data
+            console.log(data)
         }
         fetch(this.$store.state.address + page, requestOptions)
             .then((response) => {

@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-modal id="show-modal" size="xl" :title="recipe.name">
-      <b-img src="https://picsum.photos/1024/400/?image=41" fluid alt="Responsive image"></b-img>
+      <b-img v-if="recipe.image" :src="recipe.image" fluid alt="Responsive image"></b-img>
       <b-container style="margin-top: 20px">
         <b-row>
           <b-col>
@@ -34,6 +34,7 @@
                             @update-comment="updateComment"
             />
             <b-pagination
+                v-if="comments.length > perPage"
                 v-model="currentPage"
                 :total-rows="rows"
                 :per-page="perPage"

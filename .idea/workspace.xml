@@ -20,13 +20,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="94d31ea5-7d0d-4ae0-b8cf-037b0d4068e6" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/receptu_svetaine.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/receptu_svetaine.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/components/AddRecipe.vue" beforeDir="false" afterPath="$PROJECT_DIR$/assets/components/AddRecipe.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/components/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/assets/components/App.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/components/EditRecipe.vue" beforeDir="false" afterPath="$PROJECT_DIR$/assets/components/EditRecipe.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/components/RecipeCard.vue" beforeDir="false" afterPath="$PROJECT_DIR$/assets/components/RecipeCard.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/components/ShowRecipe.vue" beforeDir="false" afterPath="$PROJECT_DIR$/assets/components/ShowRecipe.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/plugins/fetcher.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/plugins/fetcher.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/views/Recipes.vue" beforeDir="false" afterPath="$PROJECT_DIR$/assets/views/Recipes.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/packages/framework.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/framework.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/RecipeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/RecipeController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Recipe.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Recipe.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -103,7 +112,6 @@
       <path value="$PROJECT_DIR$/vendor/doctrine/persistence" />
       <path value="$PROJECT_DIR$/vendor/doctrine/instantiator" />
       <path value="$PROJECT_DIR$/vendor/doctrine/migrations" />
-      <path value="$PROJECT_DIR$/vendor/doctrine/reflection" />
       <path value="$PROJECT_DIR$/vendor/symfony/doctrine-bridge" />
       <path value="$PROJECT_DIR$/vendor/symfony/stopwatch" />
       <path value="$PROJECT_DIR$/vendor/nikic/php-parser" />
@@ -127,6 +135,18 @@
       <path value="$PROJECT_DIR$/vendor/twig/twig" />
       <path value="$PROJECT_DIR$/vendor/symfony/twig-bundle" />
       <path value="$PROJECT_DIR$/vendor/symfony/twig-bridge" />
+      <path value="$PROJECT_DIR$/vendor/mtdowling/jmespath.php" />
+      <path value="$PROJECT_DIR$/vendor/psr/http-message" />
+      <path value="$PROJECT_DIR$/vendor/psr/http-client" />
+      <path value="$PROJECT_DIR$/vendor/ralouphie/getallheaders" />
+      <path value="$PROJECT_DIR$/vendor/aws/aws-sdk-php" />
+      <path value="$PROJECT_DIR$/vendor/guzzlehttp/promises" />
+      <path value="$PROJECT_DIR$/vendor/guzzlehttp/guzzle" />
+      <path value="$PROJECT_DIR$/vendor/guzzlehttp/psr7" />
+      <path value="$PROJECT_DIR$/vendor/symfony/http-client-contracts" />
+      <path value="$PROJECT_DIR$/vendor/lcobucci/clock" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-idn" />
+      <path value="$PROJECT_DIR$/vendor/symfony/mime" />
     </include_path>
   </component>
   <component name="ProjectId" id="1hb4CIdP8B1ZbUBgLgvMIqKcoDk" />
@@ -198,7 +218,8 @@
       <workItem from="1605874731181" duration="96000" />
       <workItem from="1605874837646" duration="11102000" />
       <workItem from="1606800933861" duration="25922000" />
-      <workItem from="1606894135965" duration="20605000" />
+      <workItem from="1606894135965" duration="20915000" />
+      <workItem from="1606976502014" duration="11080000" />
     </task>
     <servers />
   </component>
@@ -252,19 +273,19 @@
       <screen x="72" y="27" width="1608" height="1023" />
     </state>
     <state x="657" y="453" width="438" height="177" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/72.27.1608.1023/1680.0.1440.900@72.27.1608.1023" timestamp="1600587177047" />
-    <state x="2115" y="189" width="821" height="548" key="find.popup" timestamp="1606916037891">
+    <state x="2115" y="189" width="821" height="548" key="find.popup" timestamp="1606987961699">
       <screen x="1680" y="0" width="1440" height="900" />
     </state>
-    <state x="2115" y="189" width="821" height="548" key="find.popup/72.27.1608.1023/1680.0.1440.900@1680.0.1440.900" timestamp="1606916037891" />
+    <state x="2115" y="189" width="821" height="548" key="find.popup/72.27.1608.1023/1680.0.1440.900@1680.0.1440.900" timestamp="1606987961699" />
     <state x="557" y="268" width="917" height="594" key="find.popup/72.27.1608.1023/1680.0.1440.900@72.27.1608.1023" timestamp="1602329427177" />
     <state x="540" y="244" key="run.anything.popup" timestamp="1600589136753">
       <screen x="72" y="27" width="1608" height="1023" />
     </state>
     <state x="540" y="244" key="run.anything.popup/72.27.1608.1023/1680.0.1440.900@72.27.1608.1023" timestamp="1600589136753" />
-    <state x="2098" y="197" width="672" height="597" key="search.everywhere.popup" timestamp="1606900879233">
+    <state x="2098" y="197" width="672" height="597" key="search.everywhere.popup" timestamp="1606987043110">
       <screen x="1680" y="0" width="1440" height="900" />
     </state>
-    <state x="2098" y="197" width="672" height="597" key="search.everywhere.popup/72.27.1608.1023/1680.0.1440.900@1680.0.1440.900" timestamp="1606900879233" />
+    <state x="2098" y="197" width="672" height="597" key="search.everywhere.popup/72.27.1608.1023/1680.0.1440.900@1680.0.1440.900" timestamp="1606987043110" />
     <state x="539" y="251" width="672" height="678" key="search.everywhere.popup/72.27.1608.1023/1680.0.1440.900@72.27.1608.1023" timestamp="1605875646452" />
   </component>
 </project>

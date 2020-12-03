@@ -3,17 +3,20 @@
 
 namespace App\Controller;
 
-
 use App\Entity\Recipe;
 use App\Repository\CommentRepository;
 use App\Repository\IngredientsRepository;
 use App\Repository\RecipeRepository;
 use App\Repository\UserRepository;
+use Aws\Credentials\Credentials;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Aws\S3\S3Client;
+
+//require __DIR__.'/../../vendor/autoload.php';
 
 /**
  * @package App\Controller
@@ -40,50 +43,86 @@ class RecipeController extends AbstractController
      * @Route("/recipes", name="recipes_add", methods={"POST"})
      */
     public function addRecipe(Request $request, EntityManagerInterface $entityManager, UserRepository $userRepository){
+        if ($request->headers->get('Content-Type') === 'application/json') {
+            try{
+                $request = $this->transformJsonBody($request);
 
-        try{
-            $request = $this->transformJsonBody($request);
+                if (!$request ||
+                    !$request->get('name') ||
+                    !$request->get('text'))
+                {
+                    $data = [
+                        'status' => 400,
+                        'errors' => "Incorrect data",
+                    ];
+                    return $this->response($data, 400);
+                }
 
-            if (!$request ||
-                !$request->get('name') ||
-                !$request->get('text'))
-            {
+                if($this->getUser()->getBanned() == true) {
+                    $data = [
+                        'status' => 403,
+                        'errors' => "User is forbidden from posting",
+                    ];
+                    return $this->response($data, 403);
+                }
+                $recipe = new Recipe();
+                $recipe->setName($request->get('name'));
+                $recipe->setUser($this->getUser());
+                $recipe->setText($request->get('text'));
+                $recipe->setImage($request->get('image'));
+                $entityManager->persist($recipe);
+                $entityManager->flush();
+
+                $id = $recipe->getId();
+
                 $data = [
-                    'status' => 400,
-                    'errors' => "Incorrect data",
+                    'status' => 201,
+                    'success' => "Recipe added successfully",
+                    'id' => $id
                 ];
-                return $this->response($data, 400);
-            }
+                return $this->response($data,201);
 
-            if($this->getUser()->getBanned() == true) {
+            }catch (\Exception $e){
                 $data = [
-                    'status' => 403,
-                    'errors' => "User is forbidden from posting",
+                    'status' => 422,
+                    'errors' => "Data not valid",
                 ];
-                return $this->response($data, 403);
+                return $this->response($data, 422);
             }
-            $recipe = new Recipe();
-            $recipe->setName($request->get('name'));
-            $recipe->setUser($this->getUser());
-            $recipe->setText($request->get('text'));
-            $entityManager->persist($recipe);
-            $entityManager->flush();
+        } else {
+            $key = 'AKIAIVRLD2GLSR7NI73A';
+            $secret = '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';
+            $cred = new Credentials($key, $secret, NULL);
+            $s3 = new S3Client([
+                'version' => 'latest',
+                'region'  => 'eu-north-1',
+                'credentials' => $cred
+            ]);
+            $file = $request->files->get('image');
+            $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+            $newName = $originalFilename.'.'.uniqid().'.'.$file->guessExtension();
+            try {
+                $upload = $s3->putObject([
+                    'Bucket' => 'receptai',
+                    'Key'    => $newName,
+                    'Body'   => fopen($file, 'r'),
+                    'ACL'    => 'public-read'
 
-            $id = $recipe->getId();
-
-            $data = [
-                'status' => 201,
-                'success' => "Recipe added successfully",
-                'id' => $id
-            ];
+                ]);
+                $data = [
+                    'status' => 201,
+                    'success' => "Image uploaded successfully",
+                    'link' => $upload->get('ObjectURL')
+                ];
             return $this->response($data,201);
 
-        }catch (\Exception $e){
-            $data = [
-                'status' => 422,
-                'errors' => "Data not valid",
-            ];
-            return $this->response($data, 422);
+            } catch (Aws\S3\Exception\S3Exception $e) {
+                $data = [
+                    'status' => 422,
+                    'errors' => "Error uploading the file",
+                ];
+                return $this->response($data, 422);
+            }
         }
     }
 
@@ -173,6 +212,8 @@ class RecipeController extends AbstractController
                 $recipe->setName($request->get('name'));
             if ($request->get('text'))
                 $recipe->setText($request->get('text'));
+            if ($request->get('image'))
+                $recipe->setImage($request->get('image'));
             $entityManager->flush();
 
             $data = [
