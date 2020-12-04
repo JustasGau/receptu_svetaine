@@ -1,6 +1,10 @@
 <template>
   <div>
     <b-modal id="edit-modal" size="xl" :hide-footer="true">
+      <div v-if="saving" id="saving">
+        <div id="background"></div>
+        <b-spinner id="spinner" variant="success" label="Spinning"></b-spinner>
+      </div>
       <b-form-input id="name" v-model="recipe.name" placeholder="Pavadinimas" required/>
       <b-form-file
           v-model="file"
@@ -54,6 +58,7 @@
 export default {
   data () {
     return {
+      saving: false,
       recipe: {},
       ingredients: [],
       comment: '',
@@ -128,12 +133,14 @@ export default {
             this.$fetcher('ingredients', 'POST', ingForm)
           }
         }
+        this.saving = false
         this.$emit('show-error', 'Sėkmingai atnaujintas receptas', 'success')
         this.$emit('refresh-recipes')
         this.$bvModal.hide("edit-modal")
       })
     },
     onSubmit () {
+      this.saving = true
       if (this.file !== null) {
         let pictureLink = ''
         this.$fetcher('recipes', 'POST', this.file, true).then((data) => {
@@ -179,13 +186,33 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
  #submitButton {
    margin-top: 20px;
-   margin-left: 90%;
+   margin-left: 88%;
  }
  #name {
    width: 50%;
    margin-bottom: 20px;
+ }
+ #saving {
+   position: absolute;
+   min-width: 100%;
+   min-height: 100%;
+   z-index: 2;
+ }
+ #spinner {
+   position: absolute;
+   margin-left: 50%;
+   width: 60px;
+   height: 60px;
+   margin-top: 50%;
+ }
+ #background {
+   width: 98%;
+   background-color: white;
+   height: 98%;
+   opacity: 0.7;
+   position: absolute;
  }
 </style>

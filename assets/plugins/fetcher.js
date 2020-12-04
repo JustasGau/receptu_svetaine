@@ -40,7 +40,6 @@ function workRequest (page, type, form, isImage) {
         }
         if (form && !isImage) {
             requestOptions.body = JSON.stringify(form)
-            console.log("1")
         } else if (form && isImage) {
             let data = new FormData()
             data.append('image', form)
@@ -52,6 +51,9 @@ function workRequest (page, type, form, isImage) {
                 return response.json()
             }).then((data) => {
                 console.log(data)
+                if(data.errors) {
+                    this.$emit('show-error', 'Klaida: ' + data.errors, 'danger')
+                }
                 if (!data.code) {
                     resolve(data)
                 } else if (data.message == "Expired JWT Token") {

@@ -1,5 +1,9 @@
 <template>
   <div>
+    <div v-if="saving" id="saving">
+      <div id="background"></div>
+      <b-spinner id="spinner" variant="success" label="Spinning"></b-spinner>
+    </div>
     <b-form-input id="name" v-model="recipe.name" placeholder="Pavadinimas" required/>
     <b-form-file
         v-model="file"
@@ -45,6 +49,7 @@ export default {
   data () {
     return {
       file: null,
+      saving: false,
       recipe: {
         name: '',
         text: ''
@@ -82,6 +87,7 @@ export default {
   methods: {
 
     onSubmit () {
+      this.saving = true
       let pictureLink = ''
       this.$fetcher('recipes', 'POST', this.file, true).then((data) => {
         if (data.status === 201){
@@ -104,6 +110,7 @@ export default {
             }
             this.$emit('show-error', 'Sėkmingai sukurtas receptas', 'success')
             this.$emit('refresh-recipes')
+            this.saving = false
             this.$bvModal.hide("add-modal")
           })
         }
@@ -116,13 +123,13 @@ export default {
 }
 </script>
 
-<style scoped>
- #submitButton {
-   margin-top: 20px;
-   margin-left: 90%;
- }
- #name {
-   width: 50%;
-   margin-bottom: 20px;
- }
-</style>
+<!--<style scoped>-->
+<!-- #submitButton {-->
+<!--   margin-top: 20px;-->
+<!--   margin-left: 90%;-->
+<!-- }-->
+<!-- #name {-->
+<!--   width: 50%;-->
+<!--   margin-bottom: 20px;-->
+<!-- }-->
+<!--</style>-->

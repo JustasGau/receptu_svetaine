@@ -1,9 +1,11 @@
 <template>
   <div id="app">
     <div id="main-content">
-      <header> RECEPTŲ SVETAINĖ </header>
+      <header> <img src="/images/recipe.svg" style="max-width: 22px" alt="Kiwi standing on oval"> RECEPTŲ SVETAINĖ </header>
       <b-navbar toggleable="lg" type="dark" variant="info">
-        <b-navbar-brand to="/">Receptai</b-navbar-brand>
+        <b-navbar-brand to="/">
+          Receptai
+        </b-navbar-brand>
         <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
         <b-collapse id="nav-collapse" is-nav>
           <b-navbar-nav>

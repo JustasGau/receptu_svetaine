@@ -2,7 +2,7 @@
   <div>
     <div id="container">
       <div>
-        <h1>Receptai</h1>
+        <h1>{{ filter ? "Asmeniniai Receptai" : "Receptai" }}</h1>
       </div>
       <b-button id="add-button" v-if="filter" v-b-modal.add-modal variant="primary">Pridėti receptą</b-button>
       <b-card-group deck>
@@ -65,12 +65,14 @@
       deleteRecipe (id) {
         let index
         for (let i = 0; i < this.recipes.length ; i++){
-          if (String(this.recipes[i].id) === id) {
+          if (this.recipes[i].id === id) {
             index = i
             break
           }
         }
-        this.recipes.splice(index, 1)
+        if (index) {
+          this.recipes.splice(index, 1)
+        }
       }
     },
     computed: {
