@@ -74,7 +74,10 @@ export default {
     }
   },
   created () {
-    this.$refresh()
+    console.log(this.$cookies.isKey("refresh_token"))
+    if (this.$cookies.isKey("refresh_token")) {
+      this.$refresh()
+    }
   },
   mounted () {
   }
@@ -82,10 +85,7 @@ export default {
 
 /*
 TODO
-11 loading animation
 mobile
-deploy
-ataskaita
 */
 </script>
 

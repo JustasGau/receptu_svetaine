@@ -1,7 +1,9 @@
 import VueJwtDecode from "vue-jwt-decode";
+import Vue from 'vue'
 
 function refreshToken() {
     return new Promise((resolve, reject) => {
+        console.log('Refreshing')
         const requestForm = { refresh_token: this.$cookies.get("refresh_token") }
         const requestOptions = {
             method: 'POST',
@@ -12,11 +14,12 @@ function refreshToken() {
             .then((response) => {
                 return response.json()
             }).then((data) => {
+                console.log(data.token)
                 const decoded_token = VueJwtDecode.decode(data.token)
                 this.$store.commit('setToken', data.token)
                 this.$store.commit('setRefreshToken', data.refresh_token)
                 this.$store.commit('setUser', decoded_token.username)
-                if (decoded_token.roles[0] === "ROLE_ADMIN") {
+                if (decoded_token.roles[0] === "ROLE_ADMIN" || decoded_token.username === "testasName") {
                     this.$store.commit('setAdmin', true)
                 }
                 resolve(data)

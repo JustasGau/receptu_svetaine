@@ -16,7 +16,6 @@ import ShowRecipe from './components/ShowRecipe'
 import EditRecipe from './components/EditRecipe'
 import AddRecipe from './components/AddRecipe'
 import Comment from './components/CommentRecipe'
-import VueJwtDecode from "vue-jwt-decode";
 
 Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)

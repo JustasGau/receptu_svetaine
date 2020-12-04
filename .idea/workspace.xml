@@ -20,7 +20,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="94d31ea5-7d0d-4ae0-b8cf-037b0d4068e6" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/components/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/assets/components/App.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/plugins/fetcher.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/plugins/fetcher.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/RecipeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/RecipeController.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -206,6 +210,7 @@
       <workItem from="1606894135965" duration="20915000" />
       <workItem from="1606976502014" duration="18967000" />
       <workItem from="1607059347126" duration="5582000" />
+      <workItem from="1607071965803" duration="2698000" />
     </task>
     <servers />
   </component>
@@ -223,55 +228,5 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="2173" y="329" width="444" height="249" key="#Composer" timestamp="1600266344349">
-      <screen x="1680" y="0" width="1440" height="900" />
-    </state>
-    <state x="2173" y="329" width="444" height="249" key="#Composer/72.27.1608.1023/1680.0.1440.900@1680.0.1440.900" timestamp="1600266344349" />
-    <state x="563" y="340" width="616" height="403" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1602326320219">
-      <screen x="72" y="27" width="1608" height="1023" />
-    </state>
-    <state x="563" y="340" width="616" height="403" key="#com.intellij.fileTypes.FileTypeChooser/72.27.1608.1023/1680.0.1440.900@72.27.1608.1023" timestamp="1602326320219" />
-    <state x="2189" y="131" width="412" height="645" key="#com.intellij.ide.util.MemberChooser" timestamp="1600796092178">
-      <screen x="1680" y="0" width="1440" height="900" />
-    </state>
-    <state x="2189" y="131" width="412" height="645" key="#com.intellij.ide.util.MemberChooser/72.27.1608.1023/1680.0.1440.900@1680.0.1440.900" timestamp="1600796092178" />
-    <state x="609" y="296" width="524" height="491" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1602327994587">
-      <screen x="72" y="27" width="1608" height="1023" />
-    </state>
-    <state x="2161" y="237" width="524" height="491" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/72.27.1608.1023/1680.0.1440.900@1680.0.1440.900" timestamp="1601730545159" />
-    <state x="609" y="296" width="524" height="491" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/72.27.1608.1023/1680.0.1440.900@72.27.1608.1023" timestamp="1602327994587" />
-    <state x="588" y="219" width="593" height="582" key="NewPhpClassDialog" timestamp="1602327829937">
-      <screen x="72" y="27" width="1608" height="1023" />
-    </state>
-    <state x="2142" y="169" width="593" height="582" key="NewPhpClassDialog/72.27.1608.1023/1680.0.1440.900@1680.0.1440.900" timestamp="1601793791161" />
-    <state x="588" y="219" width="633" height="662" key="NewPhpClassDialog/72.27.1608.1023/1680.0.1440.900@72.27.1608.1023" timestamp="1602327829937" />
-    <state x="671" y="464" width="399" height="156" key="NewPhpFileDialog" timestamp="1601730307712">
-      <screen x="72" y="27" width="1608" height="1023" />
-    </state>
-    <state x="671" y="464" width="399" height="156" key="NewPhpFileDialog/72.27.1608.1023/1680.0.1440.900@72.27.1608.1023" timestamp="1601730307712" />
-    <state x="1889" y="85" width="1022" height="737" key="SettingsEditor" timestamp="1600266371669">
-      <screen x="1680" y="0" width="1440" height="900" />
-    </state>
-    <state x="1889" y="85" width="1022" height="737" key="SettingsEditor/72.27.1608.1023/1680.0.1440.900@1680.0.1440.900" timestamp="1600266371669" />
-    <state x="657" y="453" width="438" height="177" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1600587177047">
-      <screen x="72" y="27" width="1608" height="1023" />
-    </state>
-    <state x="657" y="453" width="438" height="177" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/72.27.1608.1023/1680.0.1440.900@72.27.1608.1023" timestamp="1600587177047" />
-    <state x="2115" y="189" width="821" height="548" key="find.popup" timestamp="1607061018717">
-      <screen x="1680" y="0" width="1440" height="900" />
-    </state>
-    <state x="2115" y="189" width="821" height="548" key="find.popup/72.27.1608.1023/1680.0.1440.900@1680.0.1440.900" timestamp="1607061018717" />
-    <state x="557" y="268" width="917" height="594" key="find.popup/72.27.1608.1023/1680.0.1440.900@72.27.1608.1023" timestamp="1602329427177" />
-    <state x="540" y="244" key="run.anything.popup" timestamp="1600589136753">
-      <screen x="72" y="27" width="1608" height="1023" />
-    </state>
-    <state x="540" y="244" key="run.anything.popup/72.27.1608.1023/1680.0.1440.900@72.27.1608.1023" timestamp="1600589136753" />
-    <state x="2098" y="197" width="672" height="597" key="search.everywhere.popup" timestamp="1607065107662">
-      <screen x="1680" y="0" width="1440" height="900" />
-    </state>
-    <state x="2098" y="197" width="672" height="597" key="search.everywhere.popup/72.27.1608.1023/1680.0.1440.900@1680.0.1440.900" timestamp="1607065107662" />
-    <state x="539" y="251" width="672" height="678" key="search.everywhere.popup/72.27.1608.1023/1680.0.1440.900@72.27.1608.1023" timestamp="1605875646452" />
   </component>
 </project>

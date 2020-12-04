@@ -90,8 +90,8 @@ class RecipeController extends AbstractController
                 return $this->response($data, 422);
             }
         } else {
-//            $key = 'AKIAIVRLD2GLSR7NI73A';
-//            $secret = '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';
+//            $key = ''; Keys go here
+//            $secret = ''; Keys go here
 //            $cred = new Credentials($key, $secret, NULL);
             $s3 = new S3Client([
                 'version' => 'latest',
