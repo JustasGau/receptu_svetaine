@@ -19,13 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="94d31ea5-7d0d-4ae0-b8cf-037b0d4068e6" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/components/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/assets/components/App.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/plugins/fetcher.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/plugins/fetcher.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/RecipeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/RecipeController.php" afterDir="false" />
-    </list>
+    <list default="true" id="94d31ea5-7d0d-4ae0-b8cf-037b0d4068e6" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -210,7 +204,7 @@
       <workItem from="1606894135965" duration="20915000" />
       <workItem from="1606976502014" duration="18967000" />
       <workItem from="1607059347126" duration="5582000" />
-      <workItem from="1607071965803" duration="2698000" />
+      <workItem from="1607071965803" duration="3021000" />
     </task>
     <servers />
   </component>
