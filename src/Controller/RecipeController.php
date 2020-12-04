@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Aws\S3\S3Client;
 
-//require __DIR__.'/../../vendor/autoload.php';
+require __DIR__.'/../../vendor/autoload.php';
 
 /**
  * @package App\Controller
@@ -90,13 +90,13 @@ class RecipeController extends AbstractController
                 return $this->response($data, 422);
             }
         } else {
-            $key = 'AKIAIVRLD2GLSR7NI73A';
-            $secret = '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';
-            $cred = new Credentials($key, $secret, NULL);
+//            $key = 'AKIAIVRLD2GLSR7NI73A';
+//            $secret = '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';
+//            $cred = new Credentials($key, $secret, NULL);
             $s3 = new S3Client([
                 'version' => 'latest',
-                'region'  => 'eu-north-1',
-                'credentials' => $cred
+                'region'  => 'eu-north-1'
+//                'credentials' => $cred
             ]);
             $file = $request->files->get('image');
             $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
