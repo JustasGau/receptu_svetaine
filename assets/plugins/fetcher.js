@@ -1,26 +1,30 @@
 import VueJwtDecode from "vue-jwt-decode";
-import Vue from 'vue'
 
-function refreshToken() {
+let vueInst = null
+
+function refreshToken(vue) {
+    let context = null
+    if (vue) context = vue
+    else context = vueInst
     return new Promise((resolve, reject) => {
         console.log('Refreshing')
-        const requestForm = { refresh_token: this.$cookies.get("refresh_token") }
+        const requestForm = { refresh_token: context.$cookies.get("refresh_token") }
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(requestForm)
         };
-        fetch(this.$store.state.address + 'token/refresh', requestOptions)
+        fetch(context.$store.state.address + 'token/refresh', requestOptions)
             .then((response) => {
                 return response.json()
             }).then((data) => {
                 console.log(data.token)
                 const decoded_token = VueJwtDecode.decode(data.token)
-                this.$store.commit('setToken', data.token)
-                this.$store.commit('setRefreshToken', data.refresh_token)
-                this.$store.commit('setUser', decoded_token.username)
+            context.$store.commit('setToken', data.token)
+            context.$store.commit('setRefreshToken', data.refresh_token)
+            context.$store.commit('setUser', decoded_token.username)
                 if (decoded_token.roles[0] === "ROLE_ADMIN" || decoded_token.username === "testasName") {
-                    this.$store.commit('setAdmin', true)
+                    context.$store.commit('setAdmin', true)
                 }
                 resolve(data)
             }
@@ -29,8 +33,13 @@ function refreshToken() {
 }
 
 function workRequest (page, type, form, isImage) {
+    if (vueInst === null) {
+        vueInst = this
+    }
+    let context = this
+    if (vueInst) context = vueInst
     return new Promise((resolve, reject) => {
-        const token = this.$store.state.token
+        const token = context.$store.state.token
         const contentType = 'application/json'
         const requestOptions = {
             method: type,
@@ -49,7 +58,7 @@ function workRequest (page, type, form, isImage) {
             requestOptions.body = data
             console.log(data)
         }
-        fetch(this.$store.state.address + page, requestOptions)
+        fetch(context.$store.state.address + page, requestOptions)
             .then((response) => {
                 return response.json()
             }).then((data) => {
@@ -60,11 +69,11 @@ function workRequest (page, type, form, isImage) {
                 if (!data.code) {
                     resolve(data)
                 } else if (data.message == "Expired JWT Token") {
-                    refreshToken().then(() => {
+                    resolve(refreshToken(this).then(() => {
                         return workRequest(page, type, form)
-                    })
+                    }))
                 } else {
-                    this.$emit('show-error', 'Klaida: ' + data.message, 'danger')
+                    context.$emit('show-error', 'Klaida: ' + data.message, 'danger')
                 }
             }
         )

@@ -99,27 +99,35 @@ class RecipeController extends AbstractController
 //                'credentials' => $cred
             ]);
             $file = $request->files->get('image');
-            $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-            $newName = $originalFilename.'.'.uniqid().'.'.$file->guessExtension();
-            try {
-                $upload = $s3->putObject([
-                    'Bucket' => 'receptai',
-                    'Key'    => $newName,
-                    'Body'   => fopen($file, 'r'),
-                    'ACL'    => 'public-read'
+            if ($file) {
+                $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+                $newName = $originalFilename . '.' . uniqid() . '.' . $file->guessExtension();
+                try {
+                    $upload = $s3->putObject([
+                        'Bucket' => 'receptai',
+                        'Key' => $newName,
+                        'Body' => fopen($file, 'r'),
+                        'ACL' => 'public-read'
 
-                ]);
-                $data = [
-                    'status' => 201,
-                    'success' => "Image uploaded successfully",
-                    'link' => $upload->get('ObjectURL')
-                ];
-            return $this->response($data,201);
+                    ]);
+                    $data = [
+                        'status' => 201,
+                        'success' => "Image uploaded successfully",
+                        'link' => $upload->get('ObjectURL')
+                    ];
+                    return $this->response($data, 201);
 
-            } catch (Aws\S3\Exception\S3Exception $e) {
+                } catch (Aws\S3\Exception\S3Exception $e) {
+                    $data = [
+                        'status' => 422,
+                        'errors' => "Error uploading the file",
+                    ];
+                    return $this->response($data, 422);
+                }
+            } else {
                 $data = [
                     'status' => 422,
-                    'errors' => "Error uploading the file",
+                    'errors' => "No picture provided",
                 ];
                 return $this->response($data, 422);
             }

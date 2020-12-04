@@ -19,7 +19,7 @@
       </b-card-group>
       <show-recipe @reset-show="show=false" :show="show" :id="id"></show-recipe>
       <edit-recipe @refresh-recipes="refreshRecipes" @show-error="showAlert" @reset-edit="edit=false" :show="edit" :id="id"></edit-recipe>
-      <b-modal size="xl" id="add-modal" :hide-footer="true"><add-recipe @refresh-recipes="refreshRecipes"></add-recipe></b-modal>
+      <b-modal size="xl" id="add-modal" :hide-footer="true"><add-recipe @show-error="showAlert" @refresh-recipes="refreshRecipes"></add-recipe></b-modal>
     </div>
   </div>
 </template>

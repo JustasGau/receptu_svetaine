@@ -39,7 +39,7 @@
     <!--    ALERT    -->
     <router-view id="content" @show-error="showAlert"/>
 
-    <footer id="footer"> Visos teisės: Justo Gauryliaus - nevokit</footer>
+    <footer id="footer"> Receptų svetainės projektas - Justo Gauryliaus</footer>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Sansita+Swashed:wght@600&display=swap" rel="stylesheet">
   </div>
@@ -76,7 +76,7 @@ export default {
   created () {
     console.log(this.$cookies.isKey("refresh_token"))
     if (this.$cookies.isKey("refresh_token")) {
-      this.$refresh()
+      this.$refresh(this)
     }
   },
   mounted () {

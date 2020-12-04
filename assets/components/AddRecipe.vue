@@ -114,6 +114,8 @@ export default {
             this.$bvModal.hide("add-modal")
           })
         }
+        this.$bvModal.hide("add-modal")
+        this.$emit('show-error', 'Nepridėta nuotrauka', 'danger')
       })
     }
   },
