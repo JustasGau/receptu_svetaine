@@ -43,8 +43,8 @@ const store = new Vuex.Store({
         refreshToken: '',
         user: '',
         isAdmin: false,
-        address: 'https://127.0.0.1:8000/api/'
-        // address: 'https://arcane-spire-27910.herokuapp.com/api/'
+        // address: 'https://127.0.0.1:8000/api/'
+        address: 'https://arcane-spire-27910.herokuapp.com/api/'
     },
     mutations: {
         setToken (state, token) {
